@@ -801,6 +801,22 @@ ul li,
 ol li {
     margin: 8px 0;
 }
+
+/* 自定义添加toc样式 */
+.main {
+    position: relative;
+}
+.main #toc {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    background-color: #eee;
+    font-size: 0.8em;
+    color: color-link;
+    .toc-link, toc-child {
+        list-style: none;
+    }
+}
 @keyframes loop1 {
     from {
         transform: rotate(30deg);
