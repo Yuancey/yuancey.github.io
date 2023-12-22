@@ -807,15 +807,28 @@ ol li {
     position: relative;
 }
 #main #toc {
-    position: absolute;
-    top: 20px;
-    right: 0;
+    position: fixed;
+    top: 80px;
+    right: 20px;
     background-color: #eee;
+    padding-right: 10px;
+    max-height: 560px;
     font-size: 0.8em;
     color: color-link;
-    .toc-link, toc-child {
-        list-style: none;
-    }
+    overflow-y: auto;
+}
+#main #toc .sidebar-title {
+    margin: 20px;
+}
+/* #main #toc .toc-link, #main #toc .toc-child {
+    list-style: none;
+} */
+#main #toc .toc .toc-item a span {
+    display: block;
+    width: 140px;
+    flex-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 @keyframes loop1 {
     from {
@@ -911,6 +924,9 @@ ol li {
     }
 }
 @media (min-width: 900px) and (max-width: 1200px) {
+    #layout #main #toc {
+        display: none;
+    }
     #home-card {
         display: none;
     }
@@ -923,6 +939,9 @@ ol li {
     }
 }
 @media (max-width: 900px) {
+    #layout #main #toc {
+        display: none;
+    }
     #home-head #home-info {
         height: 350px;
         width: 350px;
