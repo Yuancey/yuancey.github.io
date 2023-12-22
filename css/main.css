@@ -808,11 +808,11 @@ ol li {
 }
 #main #toc {
     position: fixed;
-    top: 80px;
+    top: 100px;
     right: 20px;
     background-color: #eee;
     padding-right: 10px;
-    max-height: 560px;
+    max-height: 540px;
     font-size: 0.8em;
     color: color-link;
     overflow-y: auto;
