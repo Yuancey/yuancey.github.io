@@ -803,10 +803,10 @@ ol li {
 }
 
 /* 自定义添加toc样式 */
-.main {
+#main {
     position: relative;
 }
-.main #toc {
+#main #toc {
     position: absolute;
     top: 20px;
     right: 0;
