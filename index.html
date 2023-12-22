@@ -168,7 +168,7 @@
 
 <div class="post">
     <a href="/2023/12/21/hello-world/">
-        <h2 class="post-title">Hello World</h2>
+        <h2 class="post-title">HEXO搭建个人网站</h2>
     </a>
     <div class="category-and-date">
         
@@ -184,19 +184,69 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+            <p>Welcome to my very first bolg ! [Hexo]  If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a>. </p>
+<h2 id="HEXO使用"><a href="#HEXO使用" class="headerlink" title="HEXO使用"></a>HEXO使用</h2><h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><pre><code class="bash">$ npm install -g hexo-cli
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo文档</a></p>
+<h3 id="Init"><a href="#Init" class="headerlink" title="Init"></a>Init</h3><pre><code class="bash">$ hexo init (你的文件夹名称)
+$ cd (你的文件夹名称)
+$ npm install 
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
+<h3 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>title</td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td>subTitle</td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td>description</td>
+<td>网站关键词</td>
+</tr>
+<tr>
+<td>author</td>
+<td>作者</td>
+</tr>
+<tr>
+<td>language</td>
+<td>网站语言</td>
+</tr>
+<tr>
+<td>timezone</td>
+<td>网站时区</td>
+</tr>
+<tr>
+<td>url</td>
+<td>网址</td>
+</tr>
+</tbody></table>
+<h3 id="modify-the-theme"><a href="#modify-the-theme" class="headerlink" title="modify the theme"></a>modify the theme</h3><p><a target="_blank" rel="noopener" href="https://argvchs.github.io/">参考博客</a><br><a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">仓库地址</a></p>
+<h2 id="Github配置"><a href="#Github配置" class="headerlink" title="Github配置"></a>Github配置</h2><h3 id="生产SSH密钥"><a href="#生产SSH密钥" class="headerlink" title="生产SSH密钥"></a>生产SSH密钥</h3><pre><code class="bash">$ ssh-keygen -t rsa -C &quot;（你的Github注册邮箱）&quot; #（你的Github注册邮箱）不要加
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
+<p>1、根据提示找到.ssh文件夹<br>2、用记事本或其他文本编辑器打开id_rsa.pub并复制其内容</p>
+<h3 id="New-SSH-key"><a href="#New-SSH-key" class="headerlink" title="New SSH key"></a>New SSH key</h3><p>Settings—&gt;SSH and GPG keys—&gt;New SSH key</p>
+<h3 id="new-repository"><a href="#new-repository" class="headerlink" title="new repository"></a>new repository</h3><ul>
+<li>命名：（你的Github用户名）.github.io</li>
+<li>复制SSH地址（<a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#109;">&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#109;</a>:开头）</li>
+</ul>
+<h3 id="配置-config-yml-1"><a href="#配置-config-yml-1" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h3><pre><code class="bash">deploy:
+  type: git
+  repo: （你的SSH地址） #“（你的SSH地址）”不要加“（）”
+  branch: main
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h3 id="hexo-deployer-git"><a href="#hexo-deployer-git" class="headerlink" title="hexo-deployer-git"></a>hexo-deployer-git</h3><pre><code class="bash">$ npm install hexo-deployer-git --save
+</code></pre>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><pre><code class="bash">$ hexo clean
+$ hexo g -d
+</code></pre>
 
             
         </div>
