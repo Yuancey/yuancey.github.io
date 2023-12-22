@@ -1,0 +1,898 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>前端常用工具及配置 | 驿站</title>
+    <meta name="author" content="Yuancey" />
+    <meta name="description" content="写自己的故事" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://cdn.staticfile.org" />
+<script src="https://cdn.staticfile.org/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.loli.net" />
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>驿站</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;驿站</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>前端常用工具及配置</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/12/22
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E5%89%8D%E7%AB%AF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                前端
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #ff7d73">工具</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>前端常用工具合集</p>
+<span id="more"></span>
+
+<h2 id="前端常用工具"><a href="#前端常用工具" class="headerlink" title="前端常用工具"></a>前端常用工具</h2><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>工具</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开发</td>
+<td>VSCode 、 Hbuilder  、 微信开发者工具</td>
+</tr>
+<tr>
+<td>git</td>
+<td>git  、  sourcetree</td>
+</tr>
+<tr>
+<td>调试</td>
+<td>postman  、 apifox</td>
+</tr>
+<tr>
+<td>远程会议</td>
+<td>腾讯会议 、  向日葵</td>
+</tr>
+<tr>
+<td>笔记</td>
+<td>XMind 、 Notepad++ 、 语雀</td>
+</tr>
+<tr>
+<td>快捷小工具</td>
+<td>uTools 、 SNipaste  、 Everything</td>
+</tr>
+</tbody></table>
+<h2 id="工具配置"><a href="#工具配置" class="headerlink" title="工具配置"></a>工具配置</h2><h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><h4 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h4><table>
+<thead>
+<tr>
+<th>插件</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>微信读书</td>
+<td></td>
+</tr>
+<tr>
+<td>小程序开发助手</td>
+<td></td>
+</tr>
+<tr>
+<td>Add jsdoc comments</td>
+<td>写js生成文档注释快捷键</td>
+</tr>
+<tr>
+<td>Auto close Tag</td>
+<td>自动添加HTML&#x2F;XML 关闭标记</td>
+</tr>
+<tr>
+<td>Beautify css&#x2F;sass&#x2F;</td>
+<td>格式化代码的插件 js json css sass html 其他类型的文件不行</td>
+</tr>
+<tr>
+<td>chatGPT</td>
+<td>GPT-4</td>
+</tr>
+<tr>
+<td>Chinese Language Pack for Visual Stuc</td>
+<td>选择–&gt;中文</td>
+</tr>
+<tr>
+<td>Code Runner</td>
+<td>代码运行插件</td>
+</tr>
+<tr>
+<td>CodeMetrics</td>
+<td>代码 复杂度衡量</td>
+</tr>
+<tr>
+<td>CodeSnap</td>
+<td>代码屏幕截图</td>
+</tr>
+<tr>
+<td>CSS Formatter</td>
+<td>格式化js、css代码插件</td>
+</tr>
+<tr>
+<td>Prettier-code formatter</td>
+<td>将Html 文档结构直接生成对应 css, sass, less 组织结构</td>
+</tr>
+<tr>
+<td>Easy WXLESS</td>
+<td></td>
+</tr>
+<tr>
+<td>z-reader</td>
+<td>支持在线搜索和本地阅读，支持txt和equb格式</td>
+</tr>
+<tr>
+<td>ES7+ React&#x2F;React-Native snippets  （react代码编辑插件）</td>
+<td></td>
+</tr>
+<tr>
+<td>ESlint</td>
+<td>需要自行配置</td>
+</tr>
+<tr>
+<td>github Copilot</td>
+<td>帮助你更简单、更快速地编写代码的工具</td>
+</tr>
+<tr>
+<td>Gitlens–Git supercharged</td>
+<td>（git工作流</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>ES6</td>
+</tr>
+<tr>
+<td>json</td>
+<td></td>
+</tr>
+<tr>
+<td>leetcode</td>
+<td>力扣题目</td>
+</tr>
+<tr>
+<td>live preview</td>
+<td>实时预览网页</td>
+</tr>
+<tr>
+<td>live server</td>
+<td>在本地快速启动一个本地服务器，以便于在浏览器中实时预览网页</td>
+</tr>
+<tr>
+<td>markdown all in one</td>
+<td>预览、修改markdown文档</td>
+</tr>
+<tr>
+<td>Material icon theme</td>
+<td>文件图标预览</td>
+</tr>
+<tr>
+<td>node-snippets</td>
+<td></td>
+</tr>
+<tr>
+<td>theme</td>
+<td></td>
+</tr>
+<tr>
+<td>path autocomplete</td>
+<td>自动补全文件路径  【需要自行配置】</td>
+</tr>
+<tr>
+<td>postcode</td>
+<td></td>
+</tr>
+<tr>
+<td>px to rem &amp; rpx &amp; vm</td>
+<td></td>
+</tr>
+<tr>
+<td>reactjs code snippets</td>
+<td>react用户代码片段  【需要自行配置】</td>
+</tr>
+<tr>
+<td>sass&#x2F;less&#x2F;stylus&#x2F;pug</td>
+<td></td>
+</tr>
+<tr>
+<td>React Native Tools</td>
+<td>代码提示、Debugging、集成RN的命令。</td>
+</tr>
+<tr>
+<td>todo tree</td>
+<td>提高代码管理效率，通过识别代码中的todo注释，整理成树形结构【需要自行配置】</td>
+</tr>
+<tr>
+<td>Vetur</td>
+<td>快速自动修改 【需要自行配置】</td>
+</tr>
+<tr>
+<td>uniapp-snippet</td>
+<td>nuniapp片段提示 【需要自行配置】</td>
+</tr>
+<tr>
+<td>vscode-icons</td>
+<td></td>
+</tr>
+<tr>
+<td>vue3 snippets</td>
+<td>vue3代码片段【需要自行配置】</td>
+</tr>
+<tr>
+<td>vue language features</td>
+<td>为vue3构建的语言支持插件</td>
+</tr>
+<tr>
+<td>vueHelper</td>
+<td>vue代码提示插件</td>
+</tr>
+<tr>
+<td>windows opacity</td>
+<td></td>
+</tr>
+<tr>
+<td>wxml-lanauge service</td>
+<td>微信小程序.xml文件代码高亮，标签、属性的智能不全</td>
+</tr>
+<tr>
+<td>xml tools</td>
+<td></td>
+</tr>
+<tr>
+<td>easy less</td>
+<td></td>
+</tr>
+<tr>
+<td>easy sass</td>
+<td></td>
+</tr>
+<tr>
+<td>git history</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h4><h5 id="配置代码片段"><a href="#配置代码片段" class="headerlink" title="配置代码片段"></a>配置代码片段</h5><ul>
+<li>文件–首选项–配置用户代码片段</li>
+</ul>
+<pre><code class="javascript">&#123;
+    // Place your snippets for javascript here. Each snippet is defined under a snippet name and has a prefix, body and 
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and $&#123;1:label&#125;, $&#123;2:another&#125; for placeholders. Placeholders with the 
+    // same ids are connected.
+    // Example:
+    &quot;Print to console&quot;: &#123;
+        &quot;prefix&quot;: &quot;lg&quot;,
+        &quot;body&quot;: [
+            &quot;console.log($0);&quot;
+        ],
+        &quot;description&quot;: &quot;Log output to console&quot;
+    &#125;,
+    &quot;alert&quot;: &#123;
+        &quot;prefix&quot;: &quot;al&quot;,
+        &quot;body&quot;: [
+            &quot;alert(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;alert&quot;
+    &#125;,
+    &quot;document.write&quot;: &#123;
+        &quot;prefix&quot;: &quot;dw&quot;,
+        &quot;body&quot;: [
+            &quot;document.write(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;document.write&quot;
+    &#125;,
+    &quot;prompt&quot;: &#123;
+        &quot;prefix&quot;: &quot;po&quot;,
+        &quot;body&quot;: [
+            &quot;prompt(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;prompt&quot;
+    &#125;,
+    &quot;confirm&quot;: &#123;
+        &quot;prefix&quot;: &quot;cf&quot;,
+        &quot;body&quot;: [
+            &quot;confirm(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;confirm&quot;
+    &#125;,
+    &quot;getElementById&quot;: &#123;
+        &quot;prefix&quot;: &quot;dgi&quot;,
+        &quot;body&quot;: [
+            &quot;document.getElementById(&#39;$1&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;getElementById&quot;
+    &#125;,
+    &quot;do-while&quot;: &#123;
+        &quot;prefix&quot;: &quot;dow&quot;,
+        &quot;body&quot;: [
+            &quot;do &#123;&quot;,
+            &quot;\t$0&quot;,
+            &quot;&#125; while();&quot;
+        ],
+        &quot;description&quot;: &quot;do-while&quot;
+    &#125;,
+    &quot;new Array&quot;: &#123;
+        &quot;prefix&quot;: &quot;newa&quot;,
+        &quot;body&quot;: [
+            &quot;new Array($0);&quot;
+        ],
+        &quot;description&quot;: &quot;new Array&quot;
+    &#125;,
+    &quot;arr3&quot;: &#123;
+        &quot;prefix&quot;: &quot;a3&quot;,
+        &quot;body&quot;: [
+            &quot;let arr = [1,2,3];&quot;
+        ],
+        &quot;description&quot;: &quot;arr3&quot;
+    &#125;,
+    &quot;arr5&quot;: &#123;
+        &quot;prefix&quot;: &quot;a5&quot;,
+        &quot;body&quot;: [
+            &quot;let arr = [1,2,3,4,5];&quot;
+        ],
+        &quot;description&quot;: &quot;arr5&quot;
+    &#125;,
+    &quot;arr10&quot;: &#123;
+        &quot;prefix&quot;: &quot;a10&quot;,
+        &quot;body&quot;: [
+            &quot;let arr = [1,2,3,4,5,6,7,8,9,10];&quot;
+        ],
+        &quot;description&quot;: &quot;arr10&quot;
+    &#125;,
+    &quot;fori&quot;: &#123;
+        &quot;prefix&quot;: &quot;fori&quot;,
+        &quot;body&quot;: [
+            &quot;for(let i = 0;i &lt; $1.length;i++) &#123;&quot;,
+            &quot;\t$0&quot;,
+            &quot;&#125;&quot;
+        ],
+        &quot;description&quot;: &quot;arr10&quot;
+    &#125;,
+    &quot;forj&quot;: &#123;
+        &quot;prefix&quot;: &quot;forj&quot;,
+        &quot;body&quot;: [
+            &quot;for(let j = 0;j &lt; $1.length;j++) &#123;&quot;,
+            &quot;\t$0&quot;,
+            &quot;&#125;&quot;
+        ],
+        &quot;description&quot;: &quot;arr10&quot;
+    &#125;,
+    &quot;optc&quot;: &#123;
+        &quot;prefix&quot;: &quot;optc&quot;,
+        &quot;body&quot;: [
+            &quot;Object.prototype.toString.call($0);&quot;
+        ],
+        &quot;description&quot;: &quot;optc&quot;
+    &#125;,
+    &quot;new Obj&quot;: &#123;
+        &quot;prefix&quot;: &quot;newo&quot;,
+        &quot;body&quot;: [
+            &quot;new Object();&quot;
+        ],
+        &quot;description&quot;: &quot;new Obj&quot;
+    &#125;,
+    &quot;getEleById&quot;: &#123;
+        &quot;prefix&quot;: &quot;dgi&quot;,
+        &quot;body&quot;: [
+            &quot;document.getElementById(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;getElementById&quot;
+    &#125;,
+    &quot;getEleByTag&quot;: &#123;
+        &quot;prefix&quot;: &quot;dgt&quot;,
+        &quot;body&quot;: [
+            &quot;document.getElementsByTagName(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;getElementByTag&quot;
+    &#125;,
+    &quot;getEleByClass&quot;: &#123;
+        &quot;prefix&quot;: &quot;dgc&quot;,
+        &quot;body&quot;: [
+            &quot;document.getElementsByClassName(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;getElementByClass&quot;
+    &#125;,
+    &quot;queryselector&quot;: &#123;
+        &quot;prefix&quot;: &quot;doq&quot;,
+        &quot;body&quot;: [
+            &quot;document.querySelector(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;querySelector&quot;
+    &#125;,
+    &quot;querySelectorAll&quot;: &#123;
+        &quot;prefix&quot;: &quot;doa&quot;,
+        &quot;body&quot;: [
+            &quot;document.querySelectorAll(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;querySelectorAll&quot;
+    &#125;,
+    &quot;onload&quot;: &#123;
+        &quot;prefix&quot;: &quot;wod&quot;,
+        &quot;body&quot;: [
+            &quot;window.onload = function () &#123;&quot;,
+            &quot;\t$0&quot;,
+            &quot;&#125;&quot;
+        ],
+        &quot;description&quot;: &quot;window.onload&quot;
+    &#125;,
+    &quot;for&quot;: &#123;
+        &quot;prefix&quot;: &quot;fo&quot;,
+        &quot;body&quot;: [
+            &quot;for(let i = 0;i &lt; $0;i++) &#123;&quot;,
+            &quot;\t&quot;,
+            &quot;&#125;&quot;
+        ],
+        &quot;description&quot;: &quot;for&quot;
+    &#125;,
+    &quot;documentCreate&quot;: &#123;
+        &quot;prefix&quot;: &quot;doc&quot;,
+        &quot;body&quot;: [
+            &quot;document.createElement(&#39;$0&#39;);&quot;
+        ],
+        &quot;description&quot;: &quot;doc&quot;
+    &#125;,
+    &quot;getStyle&quot;: &#123;
+        &quot;prefix&quot;: &quot;wgs&quot;,
+        &quot;body&quot;: [
+            &quot;window.getComputedStyle($0,null)[&#39;&#39;]&quot;
+        ],
+        &quot;description&quot;: &quot;wgs&quot;
+    &#125;,
+    &quot;event&quot;: &#123;
+        &quot;prefix&quot;: &quot;ew&quot;,
+        &quot;body&quot;: [
+            &quot;e = window.event || e;&quot;
+        ],
+        &quot;description&quot;: &quot;window.event&quot;
+    &#125;,
+    &quot;node基本服务器&quot;: &#123;
+        &quot;prefix&quot;: &quot;nodes&quot;,
+        &quot;body&quot;: [
+          &quot;// 1. 导入http模块&quot;,
+          &quot;var http = require(&#39;http&#39;);\n&quot;,
+          &quot;// 2. 创建一个web服务器&quot;,
+              &quot;var server = http.createServer(); \n&quot;,
+          &quot;// // 指定端口号并启动服务器监听 \n&quot;,
+          &quot; server.listen(&#39;3000&#39;, () =&gt; &#123;&quot;,
+          &quot;console.log(&#39;server start running at http://127.0.0.1:3000&#39;);&quot;,
+          &quot;&#125;)&quot;,
+          &quot;//监听 http 服务器的 request 请求 \n&quot;,
+          &quot;server.on(&#39;request&#39;, (request, response) =&gt; &#123; $1 \n&#125;)&quot;
+        ],
+        &quot;description&quot;: &quot;node基本服务器&quot;
+      &#125;,
+      &quot;vue实例化模块&quot;: &#123;
+        &quot;prefix&quot;: &quot;newvue&quot;,
+        &quot;body&quot;: [
+          &quot;// 实例化vue对象（MVVM中的View Model）&quot;,
+          &quot;new Vue(&#123;&quot;
+              ,&quot;el: &#39;#app&#39;,&quot;,
+          &quot;// vm控制的区块为id为app的div，此div中的所有vue指令均可以被vm解析&quot;,
+          &quot;data: &#123;&quot;,
+          &quot;// 数据 （MVVM中的Model）&quot;,
+          &quot; &#125;,&quot;,
+          &quot;methods: &#123;&quot;,
+          &quot;&#125;&quot;,
+          &quot;&#125;)&quot;
+        ],
+        &quot;description&quot;: &quot;vue实例化基本配置&quot;
+      &#125;,
+      &quot;react-app组件模板&quot;: &#123;
+        &quot;prefix&quot;: &quot;react&quot;,
+        &quot;body&quot;: [
+          &quot;import React, &#123;Component,Fragment&#125; from &#39;react&#39;;&quot;,
+          &quot;// es6语法创建组件&quot;,
+          &quot;class App extends Component&#123;&quot;,
+          &quot;render()&#123;&quot;,
+          &quot;return(&quot;,
+          &quot;&lt;Fragment&gt;&quot;,
+          &quot;&lt;/Fragment&gt;&quot;,
+          &quot;)&quot;,
+          &quot;&#125;&quot;,
+          &quot;&#125;&quot;,
+          &quot;export default App;&quot;
+        ],
+        &quot;description&quot;: &quot;vue实例化基本配置&quot;
+      &#125;,
+      &quot;入口函数&quot;: &#123;
+        &quot;prefix&quot;: &quot;$f&quot;,
+        &quot;body&quot;: [
+          &quot;$(function()&#123;&quot;,
+          &quot;$1&quot;,
+          &quot;&#125;);&quot;
+        ],
+        &quot;description&quot;: &quot;入口函数&quot;
+      &#125;
+&#125;
+</code></pre>
+<pre><code class="html">&#123;
+    &quot;Print to script&quot;: &#123;
+        &quot;prefix&quot;: &quot;scr&quot;,
+        &quot;body&quot;: [
+            &quot;&lt;script&gt;&quot;,
+            &quot;$2&quot;,
+            &quot;&lt;/script&gt;&quot;
+        ],
+        &quot;description&quot;: &quot;Log output to console&quot;
+    &#125;,
+
+    &quot;Print to style&quot;: &#123;
+        &quot;prefix&quot;: &quot;st&quot;,
+        &quot;body&quot;: [
+            &quot;&lt;style&gt;&quot;,
+            &quot;$2&quot;,
+            &quot;&lt;/style&gt;&quot;
+        ],
+        &quot;description&quot;: &quot;Log output to console&quot;
+    &#125;
+</code></pre>
+<pre><code class="json">&#123;
+    // Place your snippets for json here. Each snippet is defined under a snippet name and has a prefix, body and 
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and $&#123;1:label&#125;, $&#123;2:another&#125; for placeholders. Placeholders with the 
+    // same ids are connected.
+    // Example:
+    // &quot;Print to console&quot;: &#123;
+    // 	&quot;prefix&quot;: &quot;log&quot;,
+    // 	&quot;body&quot;: [
+    // 		&quot;console.log(&#39;$1&#39;);&quot;,
+    // 		&quot;$2&quot;
+    // 	],
+    // 	&quot;description&quot;: &quot;Log output to console&quot;
+    // &#125;
+    &quot;window.zoomLevel&quot;: 0,
+    &quot;files.autoSave&quot;: &quot;afterDelay&quot;,
+    &quot;editor.tabSize&quot;: 4,
+    &quot;editor.wordWrap&quot;: &quot;on&quot;,
+    &quot;editor.formatOnSave&quot;: true,
+    &quot;editor.minimap.enabled&quot;: false,
+    &quot;workbench.iconTheme&quot;: &quot;vscode-icons&quot;,
+    &quot;editor.mouseWheelZoom&quot;: true,
+    &quot;workbench.sideBar.location&quot;: &quot;left&quot;,
+    &quot;vsicons.dontShowNewVersionMessage&quot;: true,
+    &quot;editor.suggest.snippetsPreventQuickSuggestions&quot;: false,
+    &quot;eslint.autoFixOnSave&quot;: true,
+    &quot;emmet.variables&quot;: &#123;
+        &quot;lang&quot;: &quot;zh-CN&quot;
+    &#125;,
+    &quot;winopacity.opacity&quot;: 189,
+    &quot;editor.codeActionsOnSave&quot;: &#123;
+        &quot;source.fixAll.eslint&quot;: true,
+    &#125;,
+    //rem换算
+    &quot;cssrem.rootFontSize&quot;: 24, //【计算时的基准值】
+    &quot;cssrem.fixedDigits&quot;: 3, //【取三位小数】     
+    &quot;cssrem.autoRemovePrefixZero&quot;: false, //【是否去除0】 
+&#125;
+</code></pre>
+<h5 id="配置eslint规则"><a href="#配置eslint规则" class="headerlink" title="配置eslint规则"></a>配置eslint规则</h5><ul>
+<li>文件-首选项-设置–搜索eslint–选择：在settings.json中编辑</li>
+</ul>
+<pre><code class="setting">&#123;
+    &quot;workbench.iconTheme&quot;: &quot;material-icon-theme&quot;,
+    &quot;[json]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;vscode.json-language-features&quot;
+    &#125;,
+    &quot;files.autoSave&quot;: &quot;onFocusChange&quot;,
+    &quot;[html]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;HookyQR.beautify&quot;
+    &#125;,
+    &quot;[javascript]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;vscode.typescript-language-features&quot;
+    &#125;,
+    &quot;[vue]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;octref.vetur&quot;
+    &#125;,
+    &quot;eslint.codeAction.showDocumentation&quot;: &#123;
+        &quot;enable&quot;: true,
+        &quot;eslint.run&quot;: &quot;onType&quot;,
+        &quot;eslint.options&quot;: &#123;
+            &quot;extensions&quot;: [
+                &quot;.js&quot;,
+                &quot;.vue&quot;,
+                &quot;.jsx&quot;,
+                &quot;.tsx&quot;
+            ]
+        &#125;,
+        &quot;editor.codeActionsOnSave&quot;: &#123;
+            &quot;source.fixAll.eslint&quot;: true
+        &#125;
+    &#125;,
+    &quot;[jsonc]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;remimarsal.prettier-now&quot;
+    &#125;,
+    &quot;[yaml]&quot;: &#123;
+
+        &quot;editor.insertSpaces&quot;: true,
+        &quot;editor.tabSize&quot;: 2,
+        &quot;editor.autoIndent&quot;: &quot;advanced&quot;,
+        &quot;gitlens.codeLens.scopes&quot;: [
+            &quot;document&quot;
+        ]
+    &#125;,
+    &quot;editor.tabSize&quot;: 2,
+    &quot;security.workspace.trust.untrustedFiles&quot;: &quot;open&quot;,
+    &quot;[css]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;aeschli.vscode-css-formatter&quot;
+    &#125;,
+    &quot;workbench.editorAssociations&quot;: &#123;
+        &quot;*.docx&quot;: &quot;default&quot;
+    &#125;,
+    &quot;files.associations&quot;: &#123;
+        &quot;*.cjson&quot;: &quot;jsonc&quot;,
+        &quot;*.wxss&quot;: &quot;css&quot;,
+        &quot;*.wxs&quot;: &quot;javascript&quot;,
+        &quot;*.html&quot;: &quot;html&quot;
+    &#125;,
+    &quot;emmet.includeLanguages&quot;: &#123;
+        &quot;wxml&quot;: &quot;html&quot;
+    &#125;,
+    &quot;minapp-vscode.disableAutoConfig&quot;: true,
+    &quot;[wxml]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;remimarsal.prettier-now&quot;
+    &#125;,
+    &quot;[less]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;HookyQR.beautify&quot;
+    &#125;,
+    &quot;[javascriptreact]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;remimarsal.prettier-now&quot;
+    &#125;,
+    &quot;explorer.confirmDelete&quot;: false,
+    &quot;[typescript]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;remimarsal.prettier-now&quot;
+    &#125;,
+    &quot;liveServer.settings.donotShowInfoMsg&quot;: true,
+    &quot;z-reader.onlineSite&quot;: &quot;起点&quot;,
+    &quot;git.suggestSmartCommit&quot;: false,
+    &quot;winopacity.opacity&quot;: 250,
+    &quot;diffEditor.ignoreTrimWhitespace&quot;: false,
+    &quot;github.copilot.enable&quot;: &#123;
+        &quot;*&quot;: false,
+        &quot;plaintext&quot;: false,
+        &quot;markdown&quot;: false,
+        &quot;scminput&quot;: false
+    &#125;,
+    &quot;eslint.execArgv&quot;: null,
+&#125;
+</code></pre>
+<h3 id="UTools"><a href="#UTools" class="headerlink" title="UTools"></a>UTools</h3><h4 id="插件-1"><a href="#插件-1" class="headerlink" title="插件"></a>插件</h4><table>
+<thead>
+<tr>
+<th>插件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>聚合翻译</td>
+</tr>
+<tr>
+<td>粘贴板</td>
+</tr>
+<tr>
+<td>markdown笔记</td>
+</tr>
+<tr>
+<td>json编辑器</td>
+</tr>
+<tr>
+<td>Javascript文档</td>
+</tr>
+<tr>
+<td>css文档</td>
+</tr>
+<tr>
+<td>vue2</td>
+</tr>
+<tr>
+<td>网页快开</td>
+</tr>
+</tbody></table>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 驿站
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yuancey
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
