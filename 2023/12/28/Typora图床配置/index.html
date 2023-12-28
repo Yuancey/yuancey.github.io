@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Hexo食用指南 | 驿站</title>
+    <title>Typora图床配置 | 驿站</title>
     <meta name="author" content="Yuancey" />
     <meta name="description" content="写自己的故事" />
     <meta name="keywords" content="" />
@@ -154,22 +154,22 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Hexo食用指南</h1>
+        <h1>Typora图床配置</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/12/22
+            2023/12/28
         </span>
         
         <span class="category">
-            <a href="/categories/hexo/">
+            <a href="/categories/%E5%B7%A5%E5%85%B7/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                hexo
+                工具
             </a>
         </span>
         
@@ -182,7 +182,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%8C%87%E5%8D%97/" style="color: #00bcd4">指南</a>
+                <a href="/tags/typora/" style="color: #03a9f4">typora</a>
             </span>
             
         </span>
@@ -193,126 +193,34 @@
         
   <div id="toc">
       <strong class="sidebar-title">目录</strong>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">Hexo常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E7%89%B9%E6%AE%8A%E9%A1%B5%E9%9D%A2"><span class="toc-text">新建特殊页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88"><span class="toc-text">本地预览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E7%AB%AF%E5%8F%A3"><span class="toc-text">更改端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E9%99%A4%E7%BC%93%E5%AD%98%E6%96%87%E4%BB%B6"><span class="toc-text">清除缓存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-text">部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="toc-text">Hexo自定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%E6%A0%87%E9%A2%98%E6%A0%87%E7%AD%BE%E6%8F%92%E5%85%A5%E7%9B%AE%E5%BD%95"><span class="toc-text">解析标题标签插入目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E6%90%9C%E7%B4%A2%E6%A1%86"><span class="toc-text">增加搜索框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD"><span class="toc-text">增加评论功能</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#waline%E4%BD%BF%E7%94%A8"><span class="toc-text">waline使用</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#typora%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">typora下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8OSS"><span class="toc-text">构建阿里云对象存储OSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8PicGo-Core%EF%BC%88Command-line%EF%BC%89"><span class="toc-text">使用PicGo-Core（Command line）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#typora%E4%B8%AD%E5%8F%B3%E9%94%AE%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87"><span class="toc-text">typora中右键上传图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E4%B8%8A%E4%BC%A0%E6%88%90%E5%8A%9F"><span class="toc-text">文件是否上传成功</span></a></li></ol>
   </div>
 
 
-        <p><a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">More Info</a></p>
+        <p>Typora+PicGo+阿里云OSS</p>
 <span id="more"></span>
 
-<h2 id="Hexo常用命令"><a href="#Hexo常用命令" class="headerlink" title="Hexo常用命令"></a>Hexo常用命令</h2><h3 id="新建特殊页面"><a href="#新建特殊页面" class="headerlink" title="新建特殊页面"></a>新建特殊页面</h3><pre><code class="bash">hexo new page categories
-</code></pre>
-<table>
-<thead>
-<tr>
-<th align="left">特殊页</th>
-<th align="left">页面</th>
-<th align="left">设置</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">categories</td>
-<td align="left">分类页面</td>
-<td align="left">type: categories</td>
-</tr>
-<tr>
-<td align="left">tags</td>
-<td align="left">标签页面</td>
-<td align="left">type: tags</td>
-</tr>
-<tr>
-<td align="left">archives</td>
-<td align="left">归档页面</td>
-<td align="left">type: archives</td>
-</tr>
-<tr>
-<td align="left">about</td>
-<td align="left">关于页面</td>
-<td align="left">type: about</td>
-</tr>
-<tr>
-<td align="left">links</td>
-<td align="left">友链页面</td>
-<td align="left">type: links</td>
-</tr>
-</tbody></table>
-<h3 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h3><pre><code class="bash">hexo serve
-</code></pre>
-<h3 id="更改端口"><a href="#更改端口" class="headerlink" title="更改端口"></a>更改端口</h3><pre><code class="bash">hexo server -p 5000
-</code></pre>
-<h3 id="清除缓存文件"><a href="#清除缓存文件" class="headerlink" title="清除缓存文件"></a>清除缓存文件</h3><pre><code class="bash">hexo clean
-</code></pre>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><pre><code class="bash">hexo g -d
-</code></pre>
-<h2 id="Hexo自定义"><a href="#Hexo自定义" class="headerlink" title="Hexo自定义"></a>Hexo自定义</h2><h4 id="解析标题标签插入目录"><a href="#解析标题标签插入目录" class="headerlink" title="解析标题标签插入目录"></a>解析标题标签插入目录</h4><ol>
-<li>新增 toc.ejs 文件</li>
-</ol>
-<pre><code class="/themes/particlex/layout/toc.ejs">&lt;% if (page.toc != false) &#123; %&gt;
-  &lt;div id=&quot;toc&quot;&gt;
-      &lt;strong class=&quot;sidebar-title&quot;&gt;目录&lt;/strong&gt;
-      &lt;%- toc(page.content, &#123;list_number : false&#125;) %&gt;
-  &lt;/div&gt;
-&lt;% &#125; %&gt;
-</code></pre>
-<ul>
-<li>article.ejs</li>
-</ul>
-<pre><code class="article.ejs">+       &lt;%- partial(&#39;toc&#39;) %&gt;
-        &lt;%- page.content %&gt;
-</code></pre>
-<ol>
-<li>修改_config.yml文件</li>
-</ol>
-<pre><code class="_config.yml">toc:
-  maxdepth: 3
-  class: toc
-  slugify: transliteration
-  decodeEntities: false
-  anchor:
-    position: after
-    symbol: &#39;####&#39;
-    style: header-anchor
-</code></pre>
-<ol>
-<li>根据需要修改css样式</li>
-</ol>
-<pre><code class="/themes/particlex/source/css/main.css">/* 自定义添加toc样式 */
-#main &#123;
-    position: relative;
-&#125;
-#main #toc &#123;
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    background-color: #eee;
-    padding-right: 10px;
-    max-height: 540px;
-    font-size: 0.8em;
-    color: color-link;
-    overflow-y: auto;
-&#125;
-#main #toc .sidebar-title &#123;
-    margin: 20px;
-&#125;
-/* #main #toc .toc-link, #main #toc .toc-child &#123;
-    list-style: none;
-&#125; */
-#main #toc .toc .toc-item a span &#123;
-    display: block;
-    width: 140px;
-    flex-wrap: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+<h3 id="typora下载安装"><a href="#typora下载安装" class="headerlink" title="typora下载安装"></a>typora下载安装</h3><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1wUPyc2pAdlUipo0Trh015A?pwd=6666">下载链接</a><br>提取码：6666</p>
+<p><img src="https://yuancey.oss-cn-beijing.aliyuncs.com/img/image-20231228000028767.png" alt="image-20231228000028767"></p>
+<h3 id="构建阿里云对象存储OSS"><a href="#构建阿里云对象存储OSS" class="headerlink" title="构建阿里云对象存储OSS"></a>构建阿里云对象存储OSS</h3><h3 id="使用PicGo-Core（Command-line）"><a href="#使用PicGo-Core（Command-line）" class="headerlink" title="使用PicGo-Core（Command line）"></a>使用PicGo-Core（Command line）</h3><p>–&gt; typora&gt;文件&gt;偏好设置&gt;图像–选择PicGo-Core–点击[下载更新]–打开配置文件</p>
+<pre><code class="json">&#123;
+  &quot;picBed&quot;: &#123;
+    &quot;uploader&quot;: &quot;aliyun&quot;,
+    &quot;aliyun&quot;: &#123;
+    &quot;accessKeyId&quot;: &quot;&quot;, //ram的accessKey
+    &quot;accessKeySecret&quot;: &quot;&quot;, //ram的accessKey
+    &quot;bucket&quot;: &quot;&quot;, // 桶名
+    &quot;area&quot;: &quot;&quot;, // 地域节点
+    &quot;path&quot;: &quot;img/&quot;, // 存储路径
+     &quot;customUrl&quot;: &quot;&quot;, // Bucket域名，注意要加 http://或者 https://
+     &quot;options&quot;: &quot;&quot; // 针对图片的一些后缀处理参数 PicGo 2.2.0+ PicGo-Core 1.4.0+
+    &#125;
+  &#125;,
+  &quot;picgoPlugins&quot;: &#123;&#125;
 &#125;
 </code></pre>
-<h4 id="增加搜索框"><a href="#增加搜索框" class="headerlink" title="增加搜索框"></a>增加搜索框</h4><ul>
-<li>particlex中archives中自带 （只能搜索标题）</li>
-</ul>
-<pre><code class="/themes/particlex/_config.yml"># Search
-search:
-    enable: true
-</code></pre>
-<h4 id="增加评论功能"><a href="#增加评论功能" class="headerlink" title="增加评论功能"></a>增加评论功能</h4><h5 id="waline使用"><a href="#waline使用" class="headerlink" title="waline使用"></a>waline使用</h5><p>TODO</p>
+<h3 id="typora中右键上传图片"><a href="#typora中右键上传图片" class="headerlink" title="typora中右键上传图片"></a>typora中右键上传图片</h3><h3 id="文件是否上传成功"><a href="#文件是否上传成功" class="headerlink" title="文件是否上传成功"></a>文件是否上传成功</h3><p><a target="_blank" rel="noopener" href="https://oss.console.aliyun.com/bucket/oss-cn-beijing/yuancey/object">OSS检查文件是否上传成功</a></p>
+<p>文件路径更改为阿里云域名</p>
 
     </div>
     
