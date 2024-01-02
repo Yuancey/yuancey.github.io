@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Tags: 工具 | 驿站</title>
+    <title>02、Vue3响应式原理 | 驿站</title>
     <meta name="author" content="Yuancey" />
     <meta name="description" content="写自己的故事" />
     <meta name="keywords" content="" />
@@ -32,6 +32,14 @@
 
 <script src="/js/lib/preview.js"></script>
 
+
+
+
+
+
+<script src="https://cdn.staticfile.org/waline/2.15.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline-meta.min.css" />
 
 
 
@@ -144,116 +152,127 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
+            <div class="article">
+    <div>
+        <h1>02、Vue3响应式原理</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/1/2
+        </span>
         
-        
-        
-        <span>
-            <a href="/tags/html/" style="background: #00a596">
+        <span class="category">
+            <a href="/categories/%E5%89%8D%E7%AB%AF/">
                 <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                html
+                前端
             </a>
         </span>
         
         
-        
-        <span>
-            <a href="/tags/%E6%8C%87%E5%8D%97/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                指南
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue3/" style="color: #ffa2c4">Vue3</a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                工具
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                网站搭建
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/typora/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                typora
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Vue3/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Vue3
-            </a>
-        </span>
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/12/22</div>
-            <a href="/2023/12/22/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E9%85%8D%E7%BD%AE/">
-                <h3>前端常用工具及配置</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E5%89%8D%E7%AB%AF/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        前端
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #00bcd4">工具</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        
+  <div id="toc">
+      <strong class="sidebar-title">目录</strong>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Vue3%E5%92%8CVue2%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">1、Vue3和Vue2的对比</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-Vue2%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86"><span class="toc-text">1.1 Vue2响应式原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-ComositionAPI"><span class="toc-text">1.2 ComositionAPI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81-Reactivity%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">2、 Reactivity模块基本使用</span></a></li></ol>
+  </div>
+
+
+        <p><a target="_blank" rel="noopener" href="https://gitee.com/zhufeng-architecture-course/vue3.git">代码仓库</a></p>
+<span id="more"></span>
+
+
+
+<h3 id="1、Vue3和Vue2的对比"><a href="#1、Vue3和Vue2的对比" class="headerlink" title="1、Vue3和Vue2的对比"></a>1、Vue3和Vue2的对比</h3><h4 id="1-1-Vue2响应式原理"><a href="#1-1-Vue2响应式原理" class="headerlink" title="1.1 Vue2响应式原理"></a>1.1 Vue2响应式原理</h4><ul>
+<li>用defineProperty来进行数据的劫持，对对象的所有属性（已存在的属性）进行重写，添加getter及setter</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>新增、删除属性无法监控 。需要通过$set、$delete实现</li>
+<li>数组不采用defineProperty来进行劫持(浪费性能，对所有索引进行劫持会造成性能浪费)，需要对数组单独进行处理（对数组的方法进行重写 ）</li>
+</ul>
+<blockquote>
+<p>Vue3中使用Proxy来实现响应式数据变化。从而解决了上述问题。</p>
+</blockquote>
+<h4 id="1-2-ComositionAPI"><a href="#1-2-ComositionAPI" class="headerlink" title="1.2 ComositionAPI"></a>1.2 ComositionAPI</h4><ul>
+<li><p>Vue2中采用OptionsAPI,用户提供的data,props,methods等属性（用户编写复杂业务逻辑会出现反复横跳问题）</p>
+</li>
+<li><p>Vue2中所有的属性都是通过this访问，this存在指向明确问题</p>
+</li>
+<li><p>Vue2中很多未使用方法或属性依旧会被打包，并且所有全局API都在vue对象上公开。</p>
+<p>ComositionAPI对tree-shaking更加友好，代码也更容易压缩。</p>
+</li>
+<li><p>组件逻辑共享问题，Vue2采用mixins实现组件之间的逻辑共享；但是会有数据来源不明确、命名冲突等问题。Vue3采用</p>
+<p>ComositionAPI提取公共逻辑非常方便。</p>
+</li>
+</ul>
+<blockquote>
+<p>简单的组件仍然可以采用OptionsAPI进行编写，compositionAPI在复杂的逻辑中有着明显的优势~。 <code>reactivity</code>模块中就包含了很多我们经常使用到的<code>API</code> 例如：computed、reactive、ref、effect等</p>
+</blockquote>
+<h3 id="2、-Reactivity模块基本使用"><a href="#2、-Reactivity模块基本使用" class="headerlink" title="2、 Reactivity模块基本使用"></a>2、 Reactivity模块基本使用</h3><p>packages&#x2F;reactivity&#x2F;dist&#x2F;reactivity.html</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+  &lt;script type=&quot;module&quot;&gt;
+    import &#123; reactive, effect &#125; from &#39;../../../node_modules/@vue/reactivity/dist/reactivity.esm-browser.js&#39;
+    console.log(&#39;reactive&#39;,reactive);
+
+    //1）创建一个reactive对象
+    const state = reactive(&#123; name: &#39;jw&#39;, age: 30&#125;)
+    console.log(&quot;-state--&quot;,state);  //proxy对象
+
+    //2）effect所有的渲染都是基于它来实现的 computed watch组件
+    // 默认叫响应式effect 数据变化后会重新执行次函数
+    effect(() =&gt; &#123; //使用类似react-hook
+      app.innerHTML = &#39;姓名：&#39;+ state.name + &#39;年龄：&#39; + state.age
+    &#125;)
+    setTimeout(()=&gt; &#123;
+      state.name = &#39;Yuancey&#39;
+    &#125;,1000)
+
+    //3) 属性会收集effect (数据的依赖收集)
+    // 数据会记录自己在哪个effect中使用了，随后数据变化可以找到对应的effect
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
     </div>
+    
+    
+    
+    
+    
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
+    
+    
     
 </div>
 
@@ -285,6 +304,29 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "",
+        commentCount: false,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
+
+
+
     
 </body>
 </html>
