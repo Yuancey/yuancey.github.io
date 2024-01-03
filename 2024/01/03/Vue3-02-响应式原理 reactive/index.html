@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>02、Vue3响应式原理 | 驿站</title>
+    <title>02、Vue3响应式原理-reactive | 驿站</title>
     <meta name="author" content="Yuancey" />
     <meta name="description" content="写自己的故事" />
     <meta name="keywords" content="" />
@@ -154,7 +154,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>02、Vue3响应式原理</h1>
+        <h1>02、Vue3响应式原理-reactive</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -193,11 +193,11 @@
         
   <div id="toc">
       <strong class="sidebar-title">目录</strong>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Vue3%E5%92%8CVue2%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">1、Vue3和Vue2的对比</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-Vue2%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86"><span class="toc-text">1.1 Vue2响应式原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-ComositionAPI"><span class="toc-text">1.2 ComositionAPI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81-Reactivity%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">2、 Reactivity模块基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Reactive%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-text">3、Reactive实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-v1-0"><span class="toc-text">3.1 v1.0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-v1-1"><span class="toc-text">3.2 v1.1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-v1-2"><span class="toc-text">3.2 v1.2</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Vue3%E5%92%8CVue2%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">1、Vue3和Vue2的对比</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-Vue2%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86"><span class="toc-text">1.1 Vue2响应式原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-ComositionAPI"><span class="toc-text">1.2 ComositionAPI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81-Reactivity%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">2、 Reactivity模块基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Reactive%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-text">3、Reactive实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-v1-0"><span class="toc-text">3.1 v1.0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-v1-1"><span class="toc-text">3.2 v1.1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-v1-2"><span class="toc-text">3.2 v1.2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E8%A1%A5%E5%85%85"><span class="toc-text">4、补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-Reflect"><span class="toc-text">4.1 Reflect</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-WeakMap"><span class="toc-text">4.2 WeakMap</span></a></li></ol></li></ol>
   </div>
 
 
-        <p><a target="_blank" rel="noopener" href="https://gitee.com/zhufeng-architecture-course/vue3.git">代码仓库</a></p>
+        <p>reactive实现<br><a target="_blank" rel="noopener" href="https://gitee.com/zhufeng-architecture-course/vue3.git">代码仓库</a></p>
 <span id="more"></span>
 
 <p>学习内容：</p>
@@ -368,7 +368,6 @@ export const mutableHandlers = &#123;
 <pre><code class="tsx">import &#123; isObject &#125; from &quot;@vue/shared&quot;;
 import &#123; mutableHandlers &#125; from &#39;./handlers&#39;
 
-
 //是否已被代理的标识
 export const enum ReactiveFlags &#123;
   IS_REACTIVE = &quot;__v_isReactive&quot;  //vue中所有内置的对象都是__开头的
@@ -380,8 +379,49 @@ export function reactive(target) &#123;
   //reactive 只能处理对象类型的数据，不是对象不处理
   if(!isObject(target)) return target
 
-  //可以缓存采用映射表 
+  let existingProxy = reactiveMap.get(target) //看一下这个对象是否有被代理过
+  
+  if(existingProxy) return existingProxy //代理过直接返回
+
+  if(target[ReactiveFlags.IS_REACTIVE]) &#123;  //第一次已被代理过，再次去取值的时候就会触发get方法
+    return target
+  &#125;
+
+  //state.name =&gt; state是代理对象
+  const proxy = new Proxy(target, mutableHandlers) //没有代理过创建代理
+
+  reactiveMap.set(target, proxy) //缓存代理结果
+
+  //1) 在vue3.0的时候 会创造一个反向映射表 &#123; 代理的结果 -&gt; 原内容&#125;
+  //2) 目前不用创建反向映射表，用的方式是，如果这个对象被代理过了，说明已经被proxy拦截过了
+
+  return proxy
+&#125;
 </code></pre>
+<h3 id="4、补充"><a href="#4、补充" class="headerlink" title="4、补充"></a>4、补充</h3><h4 id="4-1-Reflect"><a href="#4-1-Reflect" class="headerlink" title="4.1 Reflect"></a>4.1 Reflect</h4><p><code>Reflect.get </code></p>
+<p>(用法)[<a target="_blank" rel="noopener" href="https://juejin.cn/post/7101084596053213215]">https://juejin.cn/post/7101084596053213215]</a></p>
+<p>Reflect.get 方法用于获取对象的属性值。它接受三个参数：</p>
+<ul>
+<li><p>target：要获取属性值的目标对象。</p>
+</li>
+<li><p>propertyKey：要获取的属性名。</p>
+</li>
+<li><p>receiver（可选）：如果target对象中指定了getter, receiver则为调用 getter 时的 this 值。</p>
+</li>
+</ul>
+<p><code> Reflect.set(target, propertyKey, value [, receiver])</code></p>
+<p>Reflect.set 方法用于设置对象的属性值。它接受四个参数：</p>
+<ul>
+<li><p>target：要设置属性值的目标对象。</p>
+</li>
+<li><p>propertyKey：要设置的属性名。</p>
+</li>
+<li><p>value：要设置的属性值。</p>
+</li>
+<li><p>receiver（可选）：调用 setter 时的 this 值</p>
+</li>
+</ul>
+<h4 id="4-2-WeakMap"><a href="#4-2-WeakMap" class="headerlink" title="4.2 WeakMap"></a>4.2 WeakMap</h4><p>（用法）[<a target="_blank" rel="noopener" href="https://zh.javascript.info/weakmap-weakset]">https://zh.javascript.info/weakmap-weakset]</a></p>
 
     </div>
     
