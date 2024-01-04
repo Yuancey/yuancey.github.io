@@ -193,48 +193,83 @@
         
   <div id="toc">
       <strong class="sidebar-title">目录</strong>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#effect%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">effect代码实现</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#effect"><span class="toc-text">effect</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81effect%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91"><span class="toc-text">1、effect执行逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81effect%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">2、effect代码实现</span></a></li></ol></li></ol></li></ol>
   </div>
 
 
-        <p><a target="_blank" rel="noopener" href="https://gitee.com/zhufeng-architecture-course/vue3.git">代码仓库</a></p>
+        <p>effect实现</p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/zhufeng-architecture-course/vue3.git">代码仓库</a></p>
 <span id="more"></span>
 
-<p>学习内容：</p>
+<h1 id="effect"><a href="#effect" class="headerlink" title="effect"></a>effect</h1><p>学习内容：</p>
 <blockquote>
-<p>在执行effect的时候，会进行对象属性的取值，在取值的时候将当前对象上的属性effect收集起来，当对象上的属性变化了，通过对象找到对应的属性 让这个属性对应的effect重新执行。</p>
+<p>1、effect执行逻辑</p>
+<p>2、effect代码实现</p>
 </blockquote>
 <ul>
 <li>属性记录effect</li>
 <li>effect记录属性</li>
 </ul>
-<h3 id="effect代码实现"><a href="#effect代码实现" class="headerlink" title="effect代码实现"></a>effect代码实现</h3><p>packages&#x2F;reactivity&#x2F;src&#x2F;effect.ts</p>
+<h3 id="1、effect执行逻辑"><a href="#1、effect执行逻辑" class="headerlink" title="1、effect执行逻辑"></a>1、effect执行逻辑</h3><blockquote>
+<p>const state &#x3D; reactive（{ name：’ly’，age：30 }）<br>1、创建一个响应式代理对象proxy<br>1.1 同一个目标对象被多次代理，直接返回代理对象<br>1.2 代理对象被再次代理，返回代理对象<br>要点：reflect代理target［key]</p>
+<p>2、默认执行effect<br>2.1 创建响应式ReactiveEffect——记录当前正在执行的activeEffect<br>2.2 当读取对象的属性时，收集track当前对象的属性所对应的依赖集<br>2.3 当对象的属性更新时，找到当前对象属性所对应的依赖集，执行各个effect———触发trigger更新</p>
+<p>2.4 每次重新更新时，重新收集依赖</p>
+<p>2.5 停止effect方法</p>
+</blockquote>
+<h3 id="2、effect代码实现"><a href="#2、effect代码实现" class="headerlink" title="2、effect代码实现"></a>2、effect代码实现</h3><p>packages&#x2F;reactivity&#x2F;src&#x2F;effect.ts</p>
 <pre><code class="tsx">export let activeEffect = undefined //e1
+
+function cleanupEffect(effect) &#123;
+  //在收集的列表中将自己移除掉   ReactiveEffect, ReactiveEffect
+  const &#123; deps &#125; = effect  //[Set(1), Set(1)]
+  console.log(&#39;----deps---&#39;,deps)
+  for(let i = 0; i &lt; deps.length; i++ ) &#123;
+    
+    //找到set 让set移除掉自己
+    deps[i].delete(effect)  //deps[i]  Set集合 
+  &#125;
+  effect.deps.length = 0
+&#125;
 
 export class ReactiveEffect &#123;
   //默认会将fn挂载在类的实例上
-  constructor(private fn) &#123; &#125;
+  constructor(private fn, public scheduler) &#123; &#125;
 
   parent = undefined
   deps = []  //当前的efffect依赖了哪些属性
+  active = true
   run() &#123;
     //多个effect
     //嵌套effect --&gt; 树结构
     try &#123;
       this.parent = activeEffect
       activeEffect = this
+
+      cleanupEffect(this)  //清理上一次的依赖收集
       return this.fn()
     &#125; finally &#123;
       activeEffect = this.parent //还原
       this.parent = undefined
     &#125;
   &#125;
+  stop() &#123;
+    if(this.active) &#123;
+      //失活得意思就是停止收集依赖
+      this.active = false
+      cleanupEffect(this)
+    &#125;
+  &#125;
 &#125;
 
-export function effect(fn) &#123;
+export function effect(fn, options: any= &#123;&#125;) &#123;
   //创建一个响应式effect,并且让effect执行
-  const _effect = new ReactiveEffect(fn)
+  const _effect = new ReactiveEffect(fn, options.scheduler)
   _effect.run()
+  //把runner方法直接给用户，用户可以去调用effect中定义得内容
+  const runner = _effect.run.bind(_effect)
+  //可以通过runner拿到efect中所有属性
+  runner.effect = _effect
+  return runner
 &#125;
 
 //嵌套时 [e1, e2]
@@ -249,7 +284,7 @@ export function effect(fn) &#123;
 //      weakmap:          (map :                  set)
 // &#123; name: &#39;jw&#39;&#125;: &#39;name&#39; --&gt; [effect,effect]
 //              : &#39;age&#39; --&gt; [efect]
-const targetMap = new WeakMap()  //key: &#123;name: &#39;jw&#39;, age: 30&#125;  value: Map(1) &#123; &#39;name&#39; =&gt; Set(1), &#39;age&#39;: =&gt; Set(1)&#125; (key: &#39;name&#39;, value: ReactiveEffect)
+const targetMap = new WeakMap()  //key: &#123;name: &#39;jw&#39;, age: 30&#125;  value: Map(2) &#123; &#39;name&#39; =&gt; Set(1), &#39;age&#39;: =&gt; Set(1)&#125; (key: &#39;name&#39;, value: ReactiveEffect)
 //key是目标对象 value是Map集合 --&gt; key是所使用的属性 ,value是依赖的结合[]
 export function track(target, key) &#123;  // 当前：属性记录了effect  TODO:effect也应当记录属性 
   //创建一个响应式effect,并且让efect执行
@@ -276,7 +311,7 @@ export function track(target, key) &#123;  // 当前：属性记录了effect  TO
     //没有--&gt;则添加
     if (shouldTrack) &#123;
       dep.add(activeEffect)
-      activeEffect.deps.push(dep) //effect也应当记录属性 
+      activeEffect.deps.push(dep) //dep: 属性对应的依赖effect set集合  //activeEffect.deps:多个属性对应的多个依赖集合
     &#125;
   &#125;
 &#125;
@@ -288,10 +323,17 @@ export function trigger(target, key, newValue, oldValue) &#123;
 
   const dep = depsMap.get(key)  //name 或者 age对应的所有effect
 
-  dep &amp;&amp; dep.forEach(effect =&gt; &#123;
+  //不要同一个对象，既运行又删除
+  const effects = [...dep]
+  //运行的是数组 删除的是set
+  effects &amp;&amp; effects.forEach(effect =&gt; &#123;
     //正在执行的effect 不要多次执行
     if(effect !== activeEffect) &#123;
-      effect.run()
+      if(effect.sheduler) &#123;        
+        effect.sheduler() //用户传递了对应的更新函数则调用次函数
+      &#125;else &#123;
+        effect.run() //如果用户没有传递则默认就是更新effect函数
+      &#125;
     &#125;
   &#125;)
 &#125;
@@ -300,8 +342,9 @@ export function trigger(target, key, newValue, oldValue) &#123;
 // 当在执行effect的时候，会进行对象属性的取值，在取值的时候将当前对象上的属性effect收集起来，当对象上的属性变化了，通过对象找到对应的属性 让这个属性对应的effect重新执行
 </code></pre>
 <p>packages&#x2F;reactivity&#x2F;src&#x2F;handlers.ts</p>
-<pre><code class="tsx">import &#123; activeEffect, track, trigger &#125; from &#39;./effect&#39;
-import &#123; ReactiveFlags &#125; from &#39;./reactive&#39;
+<pre><code class="tsx">import &#123; isObject &#125; from &#39;@vue/shared&#39;
+import &#123; activeEffect, track, trigger &#125; from &#39;./effect&#39;
+import &#123; ReactiveFlags, reactive &#125; from &#39;./reactive&#39;
 
 export const mutableHandlers = &#123;
   get(target, key, receiver) &#123; //receiver代理对象  --&gt; proxy
@@ -311,6 +354,11 @@ export const mutableHandlers = &#123;
 
     if (key === ReactiveFlags.IS_REACTIVE) &#123;
       return true
+    &#125;
+
+    //深度代理
+    if(isObject(target[key])) &#123;
+      return reactive(target[key])
     &#125;
 
     const res= Reflect.get(target, key, receiver)
@@ -376,6 +424,89 @@ export const mutableHandlers = &#123;
 
       //3) 属性会收集effect (数据的依赖收集)
       // 数据会记录自己在哪个effect中使用了，随后数据变化可以找到对应的effect
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>packages&#x2F;reactivity&#x2F;dist&#x2F;cleanup.html</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;module&quot;&gt;
+      import &#123; reactive, effect &#125; from &quot;./reactivity.js&quot;;
+      const state = reactive(&#123; name: &quot;jw&quot;, age: 30, flag: true &#125;);
+
+      effect(() =&gt; &#123;
+        // 第一次 flag 和 name 属性会触发依赖收集
+        // 下一次应该i清理掉flag和name属性，重新收集flag和age属性
+        app.innerHTML = state.flag ? state.name : state.age;
+      &#125;);
+
+      setTimeout(() =&gt; &#123;
+        state.flag = false;
+        setTimeout(() =&gt; &#123;
+          //改了name 会不会触发effect
+          console.log(&#39;改name&#39;);
+          state.name = &quot;xxx&quot;;
+        &#125;, 1000);
+      &#125;, 1000);
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>packages&#x2F;reactivity&#x2F;dist&#x2F;stop.html</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;module&quot;&gt;
+      // import &#123; reactive, effect &#125; from &#39;../../../node_modules/@vue/reactivity/dist/reactivity.esm-browser.js&#39;
+
+      import &#123; reactive, effect &#125; from &quot;./reactivity.js&quot;;
+      const state = reactive(&#123; name: &quot;jw&quot; &#125;);
+
+      let a = 1;
+      const runner = effect(
+        () =&gt; &#123;
+          console.log(&quot;runner&quot;);
+          app.innerHTML = state.name + a;
+        &#125;,
+        &#123;
+          sheduler: () =&gt; &#123;
+            //watch fn 类似watch的定义回调 数据改变后，进行操作
+            setTimeout(() =&gt; &#123;
+              //组件的异步渲染
+              runner();
+            &#125;, 1000);
+          &#125;,
+        &#125;
+      );
+
+      setTimeout(() =&gt; &#123;
+        console.log(&quot;timer&quot;);
+        state.name = &quot;jiang&quot;;
+      &#125;, 1000);
+
+      // runner.effect.stop()  //停止effect的响应式能力，不再收集相关依赖了
+
+      // //默认情况下是自动的更新，数据变化后更新effect
+      // //数据变化不更新，可以自己决定更新
+      // setTimeout(() =&gt; &#123;
+      //     state.name = &quot;xxx&quot;;
+      //     a = 1000
+      //     runner() //forceUpdate 手动更新
+      //   &#125;, 1000);
     &lt;/script&gt;
   &lt;/body&gt;
 &lt;/html&gt;
