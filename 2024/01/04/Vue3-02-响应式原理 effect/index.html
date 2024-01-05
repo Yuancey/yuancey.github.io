@@ -182,7 +182,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
+                <a href="/tags/Vue3/" style="color: #ff7d73">Vue3</a>
             </span>
             
         </span>
@@ -329,8 +329,8 @@ export function trigger(target, key, newValue, oldValue) &#123;
   effects &amp;&amp; effects.forEach(effect =&gt; &#123;
     //正在执行的effect 不要多次执行
     if(effect !== activeEffect) &#123;
-      if(effect.sheduler) &#123;        
-        effect.sheduler() //用户传递了对应的更新函数则调用次函数
+      if(effect.scheduler) &#123;        
+        effect.scheduler() //用户传递了对应的更新函数则调用次函数
       &#125;else &#123;
         effect.run() //如果用户没有传递则默认就是更新effect函数
       &#125;
@@ -483,7 +483,7 @@ export const mutableHandlers = &#123;
           app.innerHTML = state.name + a;
         &#125;,
         &#123;
-          sheduler: () =&gt; &#123;
+          scheduler: () =&gt; &#123;
             //watch fn 类似watch的定义回调 数据改变后，进行操作
             setTimeout(() =&gt; &#123;
               //组件的异步渲染
