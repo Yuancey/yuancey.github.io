@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>02、Vue3响应式原理-watch | 驿站</title>
+    <title>02、Vue3响应式原理-watchEffect | 驿站</title>
     <meta name="author" content="Yuancey" />
     <meta name="description" content="写自己的故事" />
     <meta name="keywords" content="" />
@@ -154,14 +154,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>02、Vue3响应式原理-watch</h1>
+        <h1>02、Vue3响应式原理-watchEffect</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/1/5
+            2024/1/7
         </span>
         
         <span class="category">
@@ -193,15 +193,86 @@
         
   <div id="toc">
       <strong class="sidebar-title">目录</strong>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#watch"><span class="toc-text">watch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#watch%E4%BD%93%E9%AA%8C"><span class="toc-text">watch体验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#watch%E5%AE%9E%E7%8E%B0"><span class="toc-text">watch实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="toc-text">实现思路</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#watchEffect"><span class="toc-text">watchEffect</span></a></li></ol>
   </div>
 
 
         <p><a target="_blank" rel="noopener" href="https://gitee.com/zhufeng-architecture-course/vue3.git">代码仓库</a></p>
 <span id="more"></span>
 
-<h1 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h1><h3 id="watch体验"><a href="#watch体验" class="headerlink" title="watch体验"></a>watch体验</h3><p>packages&#x2F;reactivity&#x2F;dist&#x2F;watch.html</p>
+<h1 id="watchEffect"><a href="#watchEffect" class="headerlink" title="watchEffect"></a>watchEffect</h1><p>packages&#x2F;reactivity&#x2F;dist&#x2F;watchEffect.html</p>
 <pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;module&quot;&gt;
+      //vue -&gt; runtime-dom -&gt; runtime-core -&gt; reaactivity
+      import &#123; reactive, effect, watch  &#125; from &quot;./reactivity.js&quot;;
+      // import &#123; reactive, effect, watch, watchEffect &#125; from &quot;../../../node_modules/@vue/runtime-dom/dist/runtime-dom.esm-browser.js&quot;;
+      const state = reactive(&#123; name: &quot;jw&quot;, address: &#123; n: 316&#125;, age: 0 &#125;);
+
+      //watchEffect 作用等同于watch
+      // watchEffect(() =&gt; &#123;
+      //   //自动收集依赖
+      //   console.log(&#39;222&#39;);
+      //   app.innerHTML = state.name
+      // &#125;, &#123; flush: &#39;sync&#39;&#125;)
+
+      // setTimeout(() =&gt; &#123;
+      //   state.name = &#39;j&#39;
+      //   console.log(&#39;111&#39;);
+      // &#125;,1000)
+
+      //watch大部分的场景可能是，监控数据变化，变化后发送请求
+      // 模拟一个输入框的场景 百度搜索框
+      // 1-&gt; 发送请求 2s后才返回
+      // 2-&gt; 发送请求 2s后才返回
+      // 现实: 最终显示1(1的请求后返回,覆盖了2的);需求:应当显示2的
+
+      //在vue2里,如何解决这个问题
+
+
+      let timer = 3000
+      function getData(Data) &#123;
+        return new Promise((reslove, reject) =&gt; &#123;
+          setTimeout(()=&gt; &#123;
+            reslove(Data)
+          &#125;, timer -= 1000)
+        &#125;)
+      &#125;
+
+      let arr = []  //用于存储上一次的清理操作
+
+      //闭包： 定义函数的作用域和执行函数的作用域不是同一个
+      watch(() =&gt; state.age, async function(newVal, oldVal, onCleanup) &#123;
+
+        // while(arr.length &gt; 0) &#123;
+        //   let fn = arr.shift()
+        //   fn()
+        // &#125;
+        let flag = true
+        onCleanup(function () &#123;
+          //取消操作 1)取消请求 2)清理 3)屏蔽
+          flag = false
+        &#125;)
+        let r = await getData(newVal)
+        flag &amp;&amp; (app.innerHTML = r)
+      &#125;, &#123; flush: &#39;sync&#39;&#125;)
+      state.age = 11  //请求3s返回 11
+      state.age = 111 //请求2s返回 111
+      state.age = 1111 //请求1s返回 1111
+
+
+      //watch  watchEffect  cleanup
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
   &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot; /&gt;
@@ -224,33 +295,6 @@
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-<h3 id="watch实现"><a href="#watch实现" class="headerlink" title="watch实现"></a>watch实现</h3><h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><blockquote>
-<p>1、第一个参数，必须是响应式对象或者函数 &#x3D;&#x3D;》  effect 收集其读取属性的依赖并执行<br>1.1 如果是对象，将对象的属性逐个遍历；如果是深层，则需要深拷贝traverse &#x3D;&gt; 返回getter<br>2、第二个参数为回调函数 &#x3D;&#x3D;》执行sheduler<br>2.1 记录oldVal<br>2.2 new ReactiveEffect，收集当前的effect，如果属性发生变化，则会执行对应的sheduler方法<br>要点：effect + sheduler</p>
-</blockquote>
-<p>代码<br>packages&#x2F;reactivity&#x2F;dist&#x2F;watch.html</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
-    &lt;script type=&quot;module&quot;&gt;
-      //vue -&gt; runtime-dom -&gt; runtime-core -&gt; reaactivity
-      import &#123; reactive, effect, watch  &#125; from &quot;./reactivity.js&quot;;
-      const state = reactive(&#123; name: &quot;jw&quot;, address: &#123; n: 316&#125; &#125;);
-
-     //对象是无法监控到前后值的更改
-     watch(state, (newVal, oldVal) =&gt; &#123;
-      console.log(&#39;数据变化了&#39;,newVal, oldVal);
-     &#125;, &#123; flush: &#39;sync&#39;&#125;) //先标记成同步，后面说异步更新
-     state.name = &#39;jiang&#39;
-    &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
 <p>packages&#x2F;reactivity&#x2F;src&#x2F;apiWatch.ts</p>
 <pre><code class="tsx">//watch api  用法很多，常见写法就是监控一个函数的返回值，根据返回值的变化触发对应的函数
 // watch 可以 传递一个响应式对象，可以监控到对象的变化触发回调
@@ -261,13 +305,14 @@ import &#123; isReactive &#125; from &#39;./reactive&#39;;
 
 //watch = effect+包装 watchEffect = effect ..
 
+
 // = 深拷贝，seen: 缓存被取值的对象，防止死循环
 function traverse(value, seen = new Set()) &#123;
-  if(!isObject(value) ) &#123;
+  if (!isObject(value)) &#123;
     return
-  &#125; 
+  &#125;
   //如果已经循环了这个对象，那么再循环会导致死循环
-  if(seen.has(value)) &#123;
+  if (seen.has(value)) &#123;
     return
   &#125;
   seen.add(value)
@@ -277,7 +322,17 @@ function traverse(value, seen = new Set()) &#123;
   return value
 &#125;
 
-export function watch(source, cb) &#123;
+//watchEffect 只需要运行自身
+export function watchEffect(source, options) &#123;
+  return doWatch(source, null, options)
+&#125;
+
+//watch 监控数据，数据变了，走自己的回调
+export function watch(source, cb, options) &#123;
+  return doWatch(source, cb, options)
+&#125;
+
+export function doWatch(source, cb, options) &#123;
   // 1）source是一个 响应式对象
   // 2） source是一个函数
 
@@ -286,50 +341,36 @@ export function watch(source, cb) &#123;
   if (isReactive(source)) &#123;
     //watch的值，如果是对象，将对象的属性逐个遍历；如果深层，则需要深拷贝变为proxy
     getter = () =&gt; traverse(source)  //返回的就是getter
-  &#125; else if (isFunction) &#123;    
+  &#125; else if (isFunction) &#123;
     getter = source
   &#125;
 
   let oldVal;
   // debugger
-  // 里面的属性就会收集当前的effect
-  // 如果数据变化后会执行对应的sheduler方法 =》new ReactiveEffect第二个参数
-  const effect = new ReactiveEffect(getter, () =&gt; &#123;
-    const newVal = effect.run()
-    cb(newVal, oldVal)
-    oldVal = newVal
-  &#125;)
+  //里面的属性就会收集当前的effect
+  // 如果数据变化后会执行对应的sheduler方法
+
++  let clear;
++ let onCleanup = (fn) =&gt; &#123;
++    clear = fn
++  &#125;
+
+  const job = () =&gt; &#123;
+    if(cb) &#123;
++     if(clear) clear() //下次执行的时候将上次的执行一下
+      const newVal = effect.run()
++     cb(newVal, oldVal, onCleanup)
+      oldVal = newVal
+    &#125;else &#123;
+      effect.run()
+    &#125;
+  &#125;
+
+  const effect = new ReactiveEffect(getter, job)
   oldVal = effect.run() //会让属性和effect关联在一起
-  console.log(&quot;--oldVal--&quot;,oldVal);
-&#125;
-</code></pre>
-<p>packages&#x2F;shared&#x2F;src&#x2F;index.ts</p>
-<pre><code class="tsx">export const isObject = (value) =&gt; &#123;
-  return value != null &amp;&amp; typeof value === &#39;object&#39;;
-&#125;;
-
-export function isFunction(val) &#123;
-  return typeof val === &quot;function&quot;;
+  console.log(&quot;--oldVal--&quot;, oldVal);
 &#125;
 
-</code></pre>
-<p>packages&#x2F;reactivity&#x2F;src&#x2F;reactivity.ts</p>
-<pre><code class="tsx">import &#123; isObject &#125; from &quot;@vue/shared&quot;;
-import &#123; mutableHandlers &#125; from &#39;./handlers&#39;
-
-
-//是否已被代理的标识
-export const enum ReactiveFlags &#123;
-  IS_REACTIVE = &quot;__v_isReactive&quot;  //vue中所有内置的对象都是__开头的
-&#125;
-
-const reactiveMap = new WeakMap()
-
-export function reactive(target) &#123;
-  //reactive 只能处理对象类型的数据，不是对象不处理
-  if(!isObject(target)) return target
-
-  //可以缓存采用映射表 
 </code></pre>
 
     </div>
