@@ -167,6 +167,54 @@
         
 
 <div class="post">
+    <a href="/2024/01/16/Vue3-02-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86%20computed/">
+        <h2 class="post-title">02、Vue3响应式原理-computed</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%89%8D%E7%AB%AF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                前端
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/1/16
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p><a target="_blank" rel="noopener" href="https://gitee.com/zhufeng-architecture-course/vue3.git">代码仓库</a></p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Vue3/" style="color: #03a9f4">Vue3</a>
+        </span>
+        
+    </div>
+    <a href="/2024/01/16/Vue3-02-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86%20computed/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2024/01/08/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86Vue/">
         <h2 class="post-title">面试题集-Vue</h2>
     </a>
@@ -193,71 +241,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <span id="more"></span>
-
-
-<h4 id="vue的双向绑定的原理是什么？"><a href="#vue的双向绑定的原理是什么？" class="headerlink" title="vue的双向绑定的原理是什么？"></a>vue的双向绑定的原理是什么？</h4><p>Vue2<br>1、原理：通过数据劫持和发布订阅模式来实现。<br>数据劫持 Object.defineProperty  发布订阅 getter setter watcher</p>
-<ul>
-<li>通过Object.defineProperty()来劫持各个属性的setter和getter，并在geeter和setter中添加响应的依赖和观察者。当数据发生变化时，setter会通知相关的观察者更新视图。当组件被销毁时，会清除该组件的所有依赖和观察者。<br>2、优点：</li>
-<li>向后兼容性：兼容老版本<br>数据变化能够自动更新视图，视图变化也能够自动更新数据。这种响应式原理能够使开发者更加关注数据的处理和业务逻辑，而不必关注使徒的处理和更新，从而调高开发效率和代码的可维护性。<br>3、缺点：</li>
-<li>对对象劫持，需要对属性进行重写添加getter和setter,多层嵌套对象时，性能差</li>
-<li>对象新增删除属性无法监听变化 $set $delete</li>
-<li>对数组不采用defineProperty来劫持，单独处理，改写数组原有方法，对所有索引劫持造成性能浪费</li>
-<li>数组API方法无法监听到</li>
-</ul>
-<p>Vue3<br>1、原理：使用ES6的proxy来实现响应式</p>
-<ul>
-<li>通过reactive()函数将data对象转换为响应式对象，使用proxy对对象进行拦截。当读取对象的属性时，在get方法中收集依赖WeakMap,每个reactive对象对应一个Map,用于存储该对象的所有依赖； 当属性发生变化时，会触发set方法，通过找到当前对象属性所存储的依赖集Set，触发更新。</li>
-</ul>
-<p>2、优点：<br>解决了vue2中Object.defineProperty的问题</p>
-<p>3、缺点：</p>
-<ul>
-<li>向后兼容性差，不支持老版本浏览器</li>
-<li>不可变性和不可拓展性。Proxy创建的对象是不可变的。Obeject.freeze()或Obeject.seal()无法改变对象的不可变性和不可拓展性。</li>
-</ul>
-<h4 id="Vuex和localStorage的区别是什么？"><a href="#Vuex和localStorage的区别是什么？" class="headerlink" title="Vuex和localStorage的区别是什么？"></a>Vuex和localStorage的区别是什么？</h4><p>区别：<br>1、存储位置：Vuex存储于内存中，localStorage存储于浏览器中<br>2、存储时效：页面刷新或重加载时，Vuex的数据会重置，localStorage的数据不会重置，需要手动删除才会重置<br>3、应用场景：Vuex用于组件共享状态，localStorage用于不同页面或不同会话之间共享数据</p>
-<h4 id="关于对-Vue-项目进行优化，你有哪些方法"><a href="#关于对-Vue-项目进行优化，你有哪些方法" class="headerlink" title="关于对 Vue 项目进行优化，你有哪些方法?"></a>关于对 Vue 项目进行优化，你有哪些方法?</h4><p>1、代码层面</p>
-<ul>
-<li>路由懒加载</li>
-<li>图片资源懒加载</li>
-<li>三方插件的按需引入</li>
-<li>提取复用逻辑代码</li>
-<li>keep-alive缓存组件</li>
-</ul>
-<p>2、webpack层面</p>
-<ul>
-<li>对图片进行压缩</li>
-<li>提取公共代码</li>
-<li>优化sourceMap</li>
-<li>构建结果输出分析</li>
-</ul>
-<p>3、基础的web技术的优化</p>
-<ul>
-<li>开启gzip压缩</li>
-<li>浏览器缓存</li>
-<li>CDN的使用</li>
-<li>使用Chorme Performance查找性能瓶颈</li>
-</ul>
-<h4 id="为什么组件中的-data-必须是一个函数，然后-return-一个对象，而-new-Vue-实例里，data-可以直接是一个对象？"><a href="#为什么组件中的-data-必须是一个函数，然后-return-一个对象，而-new-Vue-实例里，data-可以直接是一个对象？" class="headerlink" title="为什么组件中的 data 必须是一个函数，然后 return 一个对象，而 new Vue 实例里，data 可以直接是一个对象？"></a>为什么组件中的 data 必须是一个函数，然后 return 一个对象，而 new Vue 实例里，data 可以直接是一个对象？</h4><p>组件中：<br>实例不唯一。<br>组件为子实例，可能会被复用，防止多个组件实例共用一个对象，防止数据污染。</p>
-<p>new Vue中：<br>实例唯一。</p>
-<h4 id="使用TS的优势有哪些"><a href="#使用TS的优势有哪些" class="headerlink" title="使用TS的优势有哪些?"></a>使用TS的优势有哪些?</h4><p>1、静态类型检查：在编译时就可以发现一些运行时错误，避免代码在生产环境中出错。<br>2、提高生产力：支持语言级别的只能感知。如代码补全、类型推导、代码导航和重构工具等。<br>3、向后兼容JS：TS是js的超集，在ts中可以使用j现有的js的代码和库，也便于js向ts迁移。<br>4、更好的协作：提供了明确的类型定义，提高代码可读性，帮助开发团队更好的协作。</p>
-<h4 id="直接给一个数组项赋值，Vue-能检测到变化吗？"><a href="#直接给一个数组项赋值，Vue-能检测到变化吗？" class="headerlink" title="直接给一个数组项赋值，Vue 能检测到变化吗？"></a>直接给一个数组项赋值，Vue 能检测到变化吗？</h4><p>在vue2中，使用数组索引赋值、修改数组的长度，vue是无法检测到数组项的变化的。<br>原因：对于常规的数组操作：push pop shift unshift splice sort reverse，vue对其进行了包装，是可以进行触发视图更新的。<br>解决：全局的Vue.set或实例方法vm.$set</p>
-<p>vue3中可以  proxy</p>
-<h4 id="Vue-组件间通信有哪几种方式？"><a href="#Vue-组件间通信有哪几种方式？" class="headerlink" title="Vue 组件间通信有哪几种方式？"></a>Vue 组件间通信有哪几种方式？</h4><p>1、父子组件<br>props &#x2F; $emit</p>
-<p>2、兄弟组件<br>$parent &#x2F; $children</p>
-<p>3、子孙组件<br>$root 或 $refs<br>Provide &#x2F; Inject<br>$attrs &#x2F; $listeners</p>
-<p>4、非关系组件<br>eventBus<br>vuex</p>
-<h4 id="说一下关于tree-shaking的原理？-webpack部分"><a href="#说一下关于tree-shaking的原理？-webpack部分" class="headerlink" title="说一下关于tree-shaking的原理？(webpack部分)"></a>说一下关于tree-shaking的原理？(webpack部分)</h4><p>tree-shaking<br>定义：是指树摇算法，将js代码中，未被使用&#x2F;引用到的无用代码，进行删除，从而达到缩减项目体积大小的效果。<br>原理：</p>
-<ul>
-<li>Make阶段，收集模块导出变量并记录到模块依赖关系图变量ModuleGraph中</li>
-<li>Seal阶段（建立module和chunk的关系，形成可执行的代码块），遍历ModuleGraph标记模块导出变量有没有被使用。</li>
-<li>生产产物时，若变量没有被其他模块使用则删除对应的导出语句。</li>
-</ul>
-<h4 id="说一下Vue-的父组件和子组件生命周期钩子函数执行顺序？"><a href="#说一下Vue-的父组件和子组件生命周期钩子函数执行顺序？" class="headerlink" title="说一下Vue 的父组件和子组件生命周期钩子函数执行顺序？"></a>说一下Vue 的父组件和子组件生命周期钩子函数执行顺序？</h4><p>加载渲染过程 (BeforeMount)<br>beforeCreate 父 –&gt;  created 父 –&gt; BeforeMount 父 –&gt; beforeCreate 子 –&gt;  created 子 –&gt; BeforeMount 子 –&gt; mounted 子 –&gt; mounted 父</p>
-<p>更新过程 (beforeUpdate)<br>beforeUpdate 父 –&gt; beforeUpdate 子 –&gt; updated 子 –&gt; updated 父</p>
-<p>销毁过程 (beforeDestroy)<br>beforeDestroy 父 –&gt;  beforeDestroy 子 –&gt; destroyed 子 –&gt; destroyed 父</p>
-<h4 id="使用过-Vue-SSR-吗？说说-SSR？"><a href="#使用过-Vue-SSR-吗？说说-SSR？" class="headerlink" title="使用过 Vue SSR 吗？说说 SSR？"></a>使用过 Vue SSR 吗？说说 SSR？</h4><p>服务端渲染<br>优点：<br>1、更好的SEO<br>2、更快的首屏渲染：服务端直接渲染出完整的HTML字符串，不需要加载js和数据后再进行渲染<br>3、更好的用户体验</p>
-
+            <p>前端面试题集-Vue</p>
             
         </div>
     </div>
@@ -319,7 +303,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #ff7d73">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #ffa2c4">Vue3</a>
         </span>
         
     </div>
@@ -367,7 +351,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #00a596">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #ffa2c4">Vue3</a>
         </span>
         
     </div>
@@ -416,7 +400,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #ff7d73">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #00a596">Vue3</a>
         </span>
         
     </div>
@@ -464,7 +448,7 @@
         
         <span class="tag">
             
-            <a href="/tags/Vue3/" style="color: #00bcd4">Vue3</a>
+            <a href="/tags/Vue3/" style="color: #ff7d73">Vue3</a>
         </span>
         
     </div>
@@ -560,7 +544,7 @@
         
         <span class="tag">
             
-            <a href="/tags/typora/" style="color: #00a596">typora</a>
+            <a href="/tags/typora/" style="color: #00bcd4">typora</a>
         </span>
         
     </div>
@@ -608,7 +592,7 @@
         
         <span class="tag">
             
-            <a href="/tags/html/" style="color: #00bcd4">html</a>
+            <a href="/tags/html/" style="color: #00a596">html</a>
         </span>
         
     </div>
@@ -656,60 +640,11 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #ffa2c4">工具</a>
+            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #00bcd4">工具</a>
         </span>
         
     </div>
     <a href="/2023/12/22/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%8F%8A%E9%85%8D%E7%BD%AE/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/12/22/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E5%8D%97/">
-        <h2 class="post-title">Hexo食用指南</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/hexo/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                hexo
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/12/22
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>Hexo常用指南</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%8C%87%E5%8D%97/" style="color: #03a9f4">指南</a>
-        </span>
-        
-    </div>
-    <a href="/2023/12/22/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E5%8D%97/" class="go-post">阅读全文</a>
 </div>
 
 
