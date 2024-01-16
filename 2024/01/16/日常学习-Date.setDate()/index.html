@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Typora图床配置 | 驿站</title>
+    <title>Date | 驿站</title>
     <meta name="author" content="Yuancey" />
     <meta name="description" content="写自己的故事" />
     <meta name="keywords" content="" />
@@ -154,22 +154,22 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Typora图床配置</h1>
+        <h1>Date</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/12/28
+            2024/1/16
         </span>
         
         <span class="category">
-            <a href="/categories/%E5%B7%A5%E5%85%B7/">
+            <a href="/categories/%E5%89%8D%E7%AB%AF/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                工具
+                前端
             </a>
         </span>
         
@@ -182,7 +182,12 @@
             
             <span class="tag">
                 
-                <a href="/tags/typora/" style="color: #03a9f4">typora</a>
+                <a href="/tags/JS/" style="color: #ffa2c4">JS</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/" style="color: #00a596">日常学习</a>
             </span>
             
         </span>
@@ -193,34 +198,36 @@
         
   <div id="toc">
       <strong class="sidebar-title">目录</strong>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81typora%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">1、typora下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%9E%84%E5%BB%BA%E9%98%BF%E9%87%8C%E4%BA%91%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8OSS"><span class="toc-text">2、构建阿里云对象存储OSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E4%BD%BF%E7%94%A8PicGo-Core%EF%BC%88Command-line%EF%BC%89"><span class="toc-text">3、使用PicGo-Core（Command line）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81typora%E4%B8%AD%E5%8F%B3%E9%94%AE%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87"><span class="toc-text">4、typora中右键上传图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E4%B8%8A%E4%BC%A0%E6%88%90%E5%8A%9F"><span class="toc-text">5、文件是否上传成功</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Date-setDate"><span class="toc-text">Date.setDate()</span></a></li></ol>
   </div>
 
 
-        <p>Typora+PicGo+阿里云OSS</p>
+        <p>Date用法</p>
 <span id="more"></span>
 
-<h3 id="1、typora下载安装"><a href="#1、typora下载安装" class="headerlink" title="1、typora下载安装"></a>1、typora下载安装</h3><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1wUPyc2pAdlUipo0Trh015A?pwd=6666">下载链接</a><br>提取码：6666</p>
-<p><img src="https://yuancey.oss-cn-beijing.aliyuncs.com/img/image-20231228000028767.png" alt="image-20231228000028767"></p>
-<h3 id="2、构建阿里云对象存储OSS"><a href="#2、构建阿里云对象存储OSS" class="headerlink" title="2、构建阿里云对象存储OSS"></a>2、构建阿里云对象存储OSS</h3><h3 id="3、使用PicGo-Core（Command-line）"><a href="#3、使用PicGo-Core（Command-line）" class="headerlink" title="3、使用PicGo-Core（Command line）"></a>3、使用PicGo-Core（Command line）</h3><p>–&gt; typora&gt;文件&gt;偏好设置&gt;图像–选择PicGo-Core–点击[下载更新]–打开配置文件</p>
-<pre><code class="json">&#123;
-  &quot;picBed&quot;: &#123;
-    &quot;uploader&quot;: &quot;aliyun&quot;,
-    &quot;aliyun&quot;: &#123;
-    &quot;accessKeyId&quot;: &quot;&quot;, //ram的accessKey
-    &quot;accessKeySecret&quot;: &quot;&quot;, //ram的accessKey
-    &quot;bucket&quot;: &quot;&quot;, // 桶名
-    &quot;area&quot;: &quot;&quot;, // 地域节点
-    &quot;path&quot;: &quot;img/&quot;, // 存储路径
-     &quot;customUrl&quot;: &quot;&quot;, // Bucket域名，注意要加 http://或者 https://
-     &quot;options&quot;: &quot;&quot; // 针对图片的一些后缀处理参数 PicGo 2.2.0+ PicGo-Core 1.4.0+
-    &#125;
-  &#125;,
-  &quot;picgoPlugins&quot;: &#123;&#125;
-&#125;
+<h1 id="Date-setDate"><a href="#Date-setDate" class="headerlink" title="Date.setDate()"></a>Date.setDate()</h1><p>setDate() 方法用于设置一个月的某一天</p>
+<p>基本适用:</p>
+<pre><code class="js">
+var d = new Date();
+
+console.log(&quot;---d---&quot;,d);   //2024-01-16T03:30:08.832Z
+
+d.setDate(15);
+
+console.log(&quot;---d---&quot;,d);   //2024-01-15T03:30:38.566Z
 </code></pre>
-<h3 id="4、typora中右键上传图片"><a href="#4、typora中右键上传图片" class="headerlink" title="4、typora中右键上传图片"></a>4、typora中右键上传图片</h3><h3 id="5、文件是否上传成功"><a href="#5、文件是否上传成功" class="headerlink" title="5、文件是否上传成功"></a>5、文件是否上传成功</h3><p><a target="_blank" rel="noopener" href="https://oss.console.aliyun.com/bucket/oss-cn-beijing/yuancey/object">OSS检查文件是否上传成功</a></p>
-<p>文件路径更改为阿里云域名</p>
+<p>应用：可以设置某个日期的前几天，后几天</p>
+<pre><code class="js">// 例：当前日期的前13天 |  近14天
+function getDate(index) &#123;
+  const date = new Date();
+  const newDate = new Date();
+  newDate.setDate(date.getDate() + index);
+  const beg = newDate.getFullYear() + &quot;-&quot; + ((newDate.getMonth() + 1 &lt; 10 ? &#39;0&#39;+(newDate.getMonth() + 1): newDate.getMonth() + 1 )) + &quot;-&quot; + (newDate.getDate() &lt; 10? &#39;0&#39; + newDate.getDate(): newDate.getDate());
+  const end = date.getFullYear() + &quot;-&quot; + ((date.getMonth() + 1 &lt; 10 ? &#39;0&#39;+(date.getMonth() + 1): date.getMonth() + 1 )) + &quot;-&quot; + (date.getDate() &lt; 10? &#39;0&#39; + date.getDate(): date.getDate());
+  return [beg, end];
+&#125;
+console.log(getDate(-13));  //[ &#39;2024-01-03&#39;, &#39;2024-01-16&#39; ]
+</code></pre>
 
     </div>
     
