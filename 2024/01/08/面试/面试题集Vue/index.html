@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>面试题集-Vue | 驿站</title>
+    <meta name="author" content="Yuancey" />
+    <meta name="description" content="写自己的故事" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://cdn.staticfile.org" />
+<script src="https://cdn.staticfile.org/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.loli.net" />
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.staticfile.org/waline/2.15.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline-meta.min.css" />
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>驿站</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;驿站</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>面试题集-Vue</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/1/8
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E9%9D%A2%E8%AF%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                面试
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Vue/" style="color: #ff7d73">Vue</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+  <div id="toc">
+      <strong class="sidebar-title">目录</strong>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#vue%E7%9A%84%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">vue的双向绑定的原理是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vuex%E5%92%8ClocalStorage%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">Vuex和localStorage的区别是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%AF%B9-Vue-%E9%A1%B9%E7%9B%AE%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="toc-text">关于对 Vue 项目进行优化，你有哪些方法?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84-data-%E5%BF%85%E9%A1%BB%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%EF%BC%8C%E7%84%B6%E5%90%8E-return-%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%EF%BC%8C%E8%80%8C-new-Vue-%E5%AE%9E%E4%BE%8B%E9%87%8C%EF%BC%8Cdata-%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E6%98%AF%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%EF%BC%9F"><span class="toc-text">为什么组件中的 data 必须是一个函数，然后 return 一个对象，而 new Vue 实例里，data 可以直接是一个对象？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8TS%E7%9A%84%E4%BC%98%E5%8A%BF%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-text">使用TS的优势有哪些?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E7%BB%99%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E9%A1%B9%E8%B5%8B%E5%80%BC%EF%BC%8CVue-%E8%83%BD%E6%A3%80%E6%B5%8B%E5%88%B0%E5%8F%98%E5%8C%96%E5%90%97%EF%BC%9F"><span class="toc-text">直接给一个数组项赋值，Vue 能检测到变化吗？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vue-%E7%BB%84%E4%BB%B6%E9%97%B4%E9%80%9A%E4%BF%A1%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-text">Vue 组件间通信有哪几种方式？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B%E5%85%B3%E4%BA%8Etree-shaking%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9F-webpack%E9%83%A8%E5%88%86"><span class="toc-text">说一下关于tree-shaking的原理？(webpack部分)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8BVue-%E7%9A%84%E7%88%B6%E7%BB%84%E4%BB%B6%E5%92%8C%E5%AD%90%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%9F"><span class="toc-text">说一下Vue 的父组件和子组件生命周期钩子函数执行顺序？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%87-Vue-SSR-%E5%90%97%EF%BC%9F%E8%AF%B4%E8%AF%B4-SSR%EF%BC%9F"><span class="toc-text">使用过 Vue SSR 吗？说说 SSR？</span></a></li></ol>
+  </div>
+
+
+        <p>前端面试题集-Vue</p>
+<span id="more"></span>
+
+
+<h4 id="vue的双向绑定的原理是什么？"><a href="#vue的双向绑定的原理是什么？" class="headerlink" title="vue的双向绑定的原理是什么？"></a>vue的双向绑定的原理是什么？</h4><p>Vue2<br>1、原理：通过数据劫持和发布订阅模式来实现。<br>数据劫持 Object.defineProperty  发布订阅 getter setter watcher</p>
+<ul>
+<li>通过Object.defineProperty()来劫持各个属性的setter和getter，并在geeter和setter中添加响应的依赖和观察者。当数据发生变化时，setter会通知相关的观察者更新视图。当组件被销毁时，会清除该组件的所有依赖和观察者。<br>2、优点：</li>
+<li>向后兼容性：兼容老版本<br>数据变化能够自动更新视图，视图变化也能够自动更新数据。这种响应式原理能够使开发者更加关注数据的处理和业务逻辑，而不必关注使徒的处理和更新，从而调高开发效率和代码的可维护性。<br>3、缺点：</li>
+<li>对对象劫持，需要对属性进行重写添加getter和setter,多层嵌套对象时，性能差</li>
+<li>对象新增删除属性无法监听变化 $set $delete</li>
+<li>对数组不采用defineProperty来劫持，单独处理，改写数组原有方法，对所有索引劫持造成性能浪费</li>
+<li>数组API方法无法监听到</li>
+</ul>
+<p>Vue3<br>1、原理：使用ES6的proxy来实现响应式</p>
+<ul>
+<li>通过reactive()函数将data对象转换为响应式对象，使用proxy对对象进行拦截。当读取对象的属性时，在get方法中收集依赖WeakMap,每个reactive对象对应一个Map,用于存储该对象的所有依赖； 当属性发生变化时，会触发set方法，通过找到当前对象属性所存储的依赖集Set，触发更新。</li>
+</ul>
+<p>2、优点：<br>解决了vue2中Object.defineProperty的问题</p>
+<p>3、缺点：</p>
+<ul>
+<li>向后兼容性差，不支持老版本浏览器</li>
+<li>不可变性和不可拓展性。Proxy创建的对象是不可变的。Obeject.freeze()或Obeject.seal()无法改变对象的不可变性和不可拓展性。</li>
+</ul>
+<h4 id="Vuex和localStorage的区别是什么？"><a href="#Vuex和localStorage的区别是什么？" class="headerlink" title="Vuex和localStorage的区别是什么？"></a>Vuex和localStorage的区别是什么？</h4><p>区别：<br>1、存储位置：Vuex存储于内存中，localStorage存储于浏览器中<br>2、存储时效：页面刷新或重加载时，Vuex的数据会重置，localStorage的数据不会重置，需要手动删除才会重置<br>3、应用场景：Vuex用于组件共享状态，localStorage用于不同页面或不同会话之间共享数据</p>
+<h4 id="关于对-Vue-项目进行优化，你有哪些方法"><a href="#关于对-Vue-项目进行优化，你有哪些方法" class="headerlink" title="关于对 Vue 项目进行优化，你有哪些方法?"></a>关于对 Vue 项目进行优化，你有哪些方法?</h4><p>1、代码层面</p>
+<ul>
+<li>路由懒加载</li>
+<li>图片资源懒加载</li>
+<li>三方插件的按需引入</li>
+<li>提取复用逻辑代码</li>
+<li>keep-alive缓存组件</li>
+</ul>
+<p>2、webpack层面</p>
+<ul>
+<li>对图片进行压缩</li>
+<li>提取公共代码</li>
+<li>优化sourceMap</li>
+<li>构建结果输出分析</li>
+</ul>
+<p>3、基础的web技术的优化</p>
+<ul>
+<li>开启gzip压缩</li>
+<li>浏览器缓存</li>
+<li>CDN的使用</li>
+<li>使用Chorme Performance查找性能瓶颈</li>
+</ul>
+<h4 id="为什么组件中的-data-必须是一个函数，然后-return-一个对象，而-new-Vue-实例里，data-可以直接是一个对象？"><a href="#为什么组件中的-data-必须是一个函数，然后-return-一个对象，而-new-Vue-实例里，data-可以直接是一个对象？" class="headerlink" title="为什么组件中的 data 必须是一个函数，然后 return 一个对象，而 new Vue 实例里，data 可以直接是一个对象？"></a>为什么组件中的 data 必须是一个函数，然后 return 一个对象，而 new Vue 实例里，data 可以直接是一个对象？</h4><p>组件中：<br>实例不唯一。<br>组件为子实例，可能会被复用，防止多个组件实例共用一个对象，防止数据污染。</p>
+<p>new Vue中：<br>实例唯一。</p>
+<h4 id="使用TS的优势有哪些"><a href="#使用TS的优势有哪些" class="headerlink" title="使用TS的优势有哪些?"></a>使用TS的优势有哪些?</h4><p>1、静态类型检查：在编译时就可以发现一些运行时错误，避免代码在生产环境中出错。<br>2、提高生产力：支持语言级别的只能感知。如代码补全、类型推导、代码导航和重构工具等。<br>3、向后兼容JS：TS是js的超集，在ts中可以使用j现有的js的代码和库，也便于js向ts迁移。<br>4、更好的协作：提供了明确的类型定义，提高代码可读性，帮助开发团队更好的协作。</p>
+<h4 id="直接给一个数组项赋值，Vue-能检测到变化吗？"><a href="#直接给一个数组项赋值，Vue-能检测到变化吗？" class="headerlink" title="直接给一个数组项赋值，Vue 能检测到变化吗？"></a>直接给一个数组项赋值，Vue 能检测到变化吗？</h4><p>在vue2中，使用数组索引赋值、修改数组的长度，vue是无法检测到数组项的变化的。<br>原因：对于常规的数组操作：push pop shift unshift splice sort reverse，vue对其进行了包装，是可以进行触发视图更新的。<br>解决：全局的Vue.set或实例方法vm.$set</p>
+<p>vue3中可以  proxy</p>
+<h4 id="Vue-组件间通信有哪几种方式？"><a href="#Vue-组件间通信有哪几种方式？" class="headerlink" title="Vue 组件间通信有哪几种方式？"></a>Vue 组件间通信有哪几种方式？</h4><p>1、父子组件<br>props &#x2F; $emit</p>
+<p>2、兄弟组件<br>$parent &#x2F; $children</p>
+<p>3、子孙组件<br>$root 或 $refs<br>Provide &#x2F; Inject<br>$attrs &#x2F; $listeners</p>
+<p>4、非关系组件<br>eventBus<br>vuex</p>
+<h4 id="说一下关于tree-shaking的原理？-webpack部分"><a href="#说一下关于tree-shaking的原理？-webpack部分" class="headerlink" title="说一下关于tree-shaking的原理？(webpack部分)"></a>说一下关于tree-shaking的原理？(webpack部分)</h4><p>tree-shaking<br>定义：是指树摇算法，将js代码中，未被使用&#x2F;引用到的无用代码，进行删除，从而达到缩减项目体积大小的效果。<br>原理：</p>
+<ul>
+<li>Make阶段，收集模块导出变量并记录到模块依赖关系图变量ModuleGraph中</li>
+<li>Seal阶段（建立module和chunk的关系，形成可执行的代码块），遍历ModuleGraph标记模块导出变量有没有被使用。</li>
+<li>生产产物时，若变量没有被其他模块使用则删除对应的导出语句。</li>
+</ul>
+<h4 id="说一下Vue-的父组件和子组件生命周期钩子函数执行顺序？"><a href="#说一下Vue-的父组件和子组件生命周期钩子函数执行顺序？" class="headerlink" title="说一下Vue 的父组件和子组件生命周期钩子函数执行顺序？"></a>说一下Vue 的父组件和子组件生命周期钩子函数执行顺序？</h4><p>加载渲染过程 (BeforeMount)<br>beforeCreate 父 –&gt;  created 父 –&gt; BeforeMount 父 –&gt; beforeCreate 子 –&gt;  created 子 –&gt; BeforeMount 子 –&gt; mounted 子 –&gt; mounted 父</p>
+<p>更新过程 (beforeUpdate)<br>beforeUpdate 父 –&gt; beforeUpdate 子 –&gt; updated 子 –&gt; updated 父</p>
+<p>销毁过程 (beforeDestroy)<br>beforeDestroy 父 –&gt;  beforeDestroy 子 –&gt; destroyed 子 –&gt; destroyed 父</p>
+<h4 id="使用过-Vue-SSR-吗？说说-SSR？"><a href="#使用过-Vue-SSR-吗？说说-SSR？" class="headerlink" title="使用过 Vue SSR 吗？说说 SSR？"></a>使用过 Vue SSR 吗？说说 SSR？</h4><p>服务端渲染<br>优点：<br>1、更好的SEO<br>2、更快的首屏渲染：服务端直接渲染出完整的HTML字符串，不需要加载js和数据后再进行渲染<br>3、更好的用户体验</p>
+
+    </div>
+    
+    
+    
+    
+    
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 驿站
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yuancey
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "",
+        commentCount: false,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
+
+
+
+    
+</body>
+</html>

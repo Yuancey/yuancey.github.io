@@ -1,0 +1,730 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>demo2-QQ音乐 | 驿站</title>
+    <meta name="author" content="Yuancey" />
+    <meta name="description" content="写自己的故事" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://cdn.staticfile.org" />
+<script src="https://cdn.staticfile.org/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.loli.net" />
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.staticfile.org/waline/2.15.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline-meta.min.css" />
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>驿站</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;驿站</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>demo2-QQ音乐</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/1/17
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E5%89%8D%E7%AB%AF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                前端
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/JS/" style="color: #03a9f4">JS</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+  <div id="toc">
+      <strong class="sidebar-title">目录</strong>
+      
+  </div>
+
+
+        <p>QQ音乐</p>
+<span id="more"></span>
+
+<p>学习内容：</p>
+<p>内容大纲：</p>
+<ul>
+<li>实战案例：QQ音乐<ul>
+<li>搭建基本骨架</li>
+<li>完善css样式</li>
+<li>实现QQ音乐功能</li>
+</ul>
+</li>
+</ul>
+<p>搭建基本骨架</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;QQ音乐播放器&lt;/title&gt;
+
+    &lt;!--IMPORT CSS--&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/reset.min.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/index.css&quot;&gt;
+
+    &lt;!-- REM --&gt;
+    &lt;script&gt;
+        ~function() &#123;
+            computedFont();
+            window.addEventListener(&#39;resize&#39;, computedFont, false);
+            function computedFont() &#123;
+                var deviceW = document.documentElement.clientWidth
+                if(deviceW &gt; 640) return
+                document.documentElement.style.fontSize = deviceW / 640 * 100 + &#39;px&#39;
+            &#125;
+        &#125;();
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;section class=&quot;container&quot;&gt;
+        &lt;!-- Audio标签
+            1、controls: 显示自带的播放器（不设置则默认不显示）
+            2、loop: 播放完成后循环播放
+            3、autoplay: 页面进入的时候就开始自动播放
+            4、preload: 设置音频的预加载方式
+                none: 开始加载页面的时候，音频不加载，只有设置播放的时候再加载
+                metadata:开始加载音频头部信息（时长\专辑...）
+                auto: 开始加载页面的时候就加载全部的信息  
+        --&gt;
+        &lt;audio src=&quot;img/myDream.m4a&quot; preload=&quot;none&quot; id=&quot;musicAudio&quot;&gt;&lt;/audio&gt;
+        &lt;div class=&quot;backgroundImg&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;background&quot;&gt;&lt;/div&gt;
+
+        &lt;!--HEADER--&gt;
+        &lt;div class=&quot;header&quot;&gt;
+            &lt;div class=&quot;content&quot;&gt;
+                &lt;img src=&quot;img/myDream.jpg&quot; alt=&quot;&quot;&gt;
+                &lt;h2&gt;
+                    &lt;span&gt;我的梦&lt;/span&gt;
+                    &lt;span&gt;张靓颖&lt;/span&gt;
+                &lt;/h2&gt;
+                &lt;a href=&quot;javascript:;&quot; class=&quot;musicBtn&quot;&gt;&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+       
+        &lt;!--MAIN--&gt;
+        &lt;div class=&quot;main&quot;&gt;
+            &lt;div class=&quot;wrapper&quot;&gt;
+                &lt;p&gt;&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!--FOOTER--&gt;
+        &lt;div class=&quot;footer&quot;&gt;
+            &lt;div class=&quot;progress&quot;&gt;
+                &lt;span class=&quot;current&quot;&gt;00:00&lt;/span&gt;
+                &lt;span class=&quot;duration&quot;&gt;00:00&lt;/span&gt;
+                &lt;div class=&quot;proBg&quot;&gt;
+                    &lt;div class=&quot;already&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;a href=&quot;javascript:;&quot; class=&quot;down&quot;&gt;下载这首音乐&lt;/a&gt;
+        &lt;/div&gt;
+
+    &lt;/section&gt;
+     &lt;!--IMPORT JS--&gt;
+     &lt;script src=&quot;js/prefixfree.min.js&quot;&gt;&lt;/script&gt;
+     &lt;script src=&quot;js/zepto.min.js&quot;&gt;&lt;/script&gt;
+     &lt;script src=&quot;js/index.js&quot;&gt;&lt;/script&gt;
+     &lt;!-- zepto 移动端的小型Jquery --&gt;
+     &lt;!-- prefixfree 省略繁琐的css3 适配各个浏览器的私有前缀 --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>完善css样式</p>
+<pre><code class="html">html &#123;
+  font-size: 100px;
+&#125;
+
+html,
+body,
+.container &#123;
+  height: 100%;
+  overflow: hidden;
+&#125;
+
+.container &#123;
+  position: relative;
+  margin: 0 auto;
+  max-width: 640px;
+&#125;
+
+.container .backgroundImg,
+.container .background &#123;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+&#125;
+
+.container .backgroundImg &#123;
+  background: url(../img/myDream.jpg) no-repeat;
+  background-size: cover;
+  filter: blur(7px);
+&#125;
+
+.container .background &#123;
+  z-index: -1;
+  background: rgba(0, 0, 0, .5);
+&#125;
+
+/*--HEADER--*/
+.header &#123;
+  position: relative;
+  padding: .3rem;
+  background: rgba(0, 0, 0, .2);
+&#125;
+
+.header .content &#123;
+  font-size: 0;
+&#125;
+
+.header .content img &#123;
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  vertical-align: top;
+&#125;
+
+.header .content h2 &#123;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: .2rem;
+&#125;
+
+.header .content h2 span &#123;
+  display: block;
+  height: .6rem;
+  line-height: .6rem;
+  color: #FFF;
+  font-size: .36rem;
+&#125;
+
+.header .content h2 span:nth-child(2) &#123;
+  font-size: .32rem;
+&#125;
+
+.header .musicBtn &#123;
+  display: block;
+  position: absolute;
+  right: .3rem;
+  top: 50%;
+  margin-top: -.3rem;
+  width: .6rem;
+  height: .6rem;
+  background: url(&quot;../img/music.svg&quot;) no-repeat;
+  background-size: 100% 100%;
+&#125;
+
+.header .musicBtn.move &#123;
+  animation: musicMove 1s linear infinite both;
+&#125;
+
+@keyframes musicMove &#123;
+  0% &#123;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  &#125;
+  100% &#123;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  &#125;
+&#125;
+
+/*--FOOTER--*/
+.footer &#123;
+  margin: .2rem;
+  height: 2.2rem;
+&#125;
+
+.footer .progress &#123;
+  position: relative;
+  height: .8rem;
+  overflow: hidden;
+&#125;
+
+.footer .progress span &#123;
+  position: absolute;
+  top: 0;
+  width: .9rem;
+  height: 100%;
+  line-height: .8rem;
+  text-align: center;
+  color: rgba(255, 255, 255, .5);
+  font-size: .24rem;
+&#125;
+
+.footer .progress span.current &#123;
+  left: 0;
+&#125;
+
+.footer .progress span.duration &#123;
+  right: 0;
+&#125;
+
+.footer .progress .proBg &#123;
+  position: relative;
+  margin: .38rem .9rem 0 .9rem;
+  height: .04rem;
+  background: rgba(255, 255, 255, .5);
+&#125;
+
+.footer .progress .proBg .already &#123;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #31C27C;
+  transition: .3s;
+&#125;
+
+.footer .down &#123;
+  display: block;
+  margin: 0 auto;
+  width: 4.4rem;
+  height: .9rem;
+  line-height: .9rem;
+  text-align: center;
+  color: #FFF;
+  font-size: .36rem;
+  border-radius: .45rem;
+  background: url(&quot;../img/sprite_play.png&quot;) .2rem -5.86rem no-repeat #31C27C;
+  background-size: .8rem 7rem;
+&#125;
+
+/*--MAIN--*/
+.main &#123;
+  position: relative;
+  margin: .4rem .2rem;
+  height: 6.56rem;
+  /*需要在JS中处理:屏幕的高度-HEADER-FOOTER-.8REM对应的PX高度值*/
+  overflow: hidden;
+&#125;
+
+.main .wrapper &#123;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: .3s;
+&#125;
+
+.main .wrapper p &#123;
+  height: .84rem;
+  line-height: .84rem;
+  text-align: center;
+  color: rgba(255, 255, 255, .5);
+  font-size: .32rem;
+  letter-spacing: .04rem;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+&#125;
+
+.main .wrapper p.select &#123;
+  color: #31C27C;
+  transition: .3s;
+&#125;
+</code></pre>
+<p>实现QQ音乐功能</p>
+<pre><code class="js">// a. 动态计算main区域高度
+// b. 获取歌词相关信息 起始时间、歌词, 并将其拼接在标签上
+// c. 进度条  计算当前播放量
+
+var musicRender = (function () &#123;
+  var $header = $(&#39;.header&#39;),
+    $main = $(&#39;.main&#39;),
+    $footer = $(&#39;.footer&#39;),
+    $wrapper = $main.find(&#39;.wrapper&#39;),
+    musicAudio = $(&#39;#musicAudio&#39;)[0],
+    $musicBtn = $header.find(&#39;.musicBtn&#39;),
+    $current = $footer.find(&#39;.current&#39;),
+    $duration = $footer.find(&#39;.duration&#39;),
+    $already = $footer.find(&#39;.already&#39;);
+
+  var $plan = $.Callbacks(),
+    autoTimer = null,
+    step = 0,
+    curTop = 0;
+
+  //--&gt;绑定歌词
+  $plan.add(function (lyric) &#123;
+    lyric = lyric.replace(/&amp;#(\d+);/g, function (res, num) &#123;
+      switch (parseFloat(num)) &#123;
+        case 32:
+          res = &#39; &#39;;
+          break;
+        case 40:
+          res = &#39;(&#39;;
+          break;
+        case 41:
+          res = &#39;)&#39;;
+          break;
+        case 45:
+          res = &#39;-&#39;;
+          break;
+      &#125;
+      return res;
+    &#125;)
+
+    // 匹配每句歌词  --&gt; 转换格式
+    // 开始时间 结束时间 每句歌词
+    var ary = [],
+      reg = /\[(\d+)&amp;#58;(\d+)&amp;#46;(?:\d+)\]([^&amp;#]+)(?:&amp;#10;)?/g;
+
+    lyric.replace(reg, function (res, minute, second, value) &#123;
+      ary.push(&#123;
+        minute: minute,
+        second: second,
+        value: value
+      &#125;);
+    &#125;)
+
+
+    // 将每句歌词信息绑定到标签上
+    var str = ``
+    for (let i = 0; i &lt; ary.length; i++) &#123;
+      var item = ary[i];
+      str += `&lt;p data-minute=&quot;$&#123;item.minute&#125;&quot; data-second=&quot;$&#123;item.second&#125;&quot;&gt;$&#123;item.value&#125;&lt;/p&gt;`
+
+    &#125;
+    $wrapper.html(str);
+  &#125;)
+
+  //-&gt;音乐播放
+  $plan.add(function () &#123;
+    musicAudio.addEventListener(&#39;canplay&#39;, function () &#123;
+      $musicBtn.css(&#39;dispaly&#39;, &#39;block&#39;)
+        .addClass(&#39;move&#39;)
+
+      //计算播放量
+      computedAlready()
+      autoTimer = setInterval(computedAlready, 1000)
+    &#125;, false)
+  &#125;)
+
+  //控制音乐的暂停或者播放
+  $plan.add(function () &#123;
+    $musicBtn.tap(function () &#123;
+      if (musicAudio.paused) &#123;
+        musicAudio.play()
+        $musicBtn.addClass(&#39;move&#39;)
+        autoTimer = setInterval(computedAlready, 1000);
+        return
+      &#125;
+      musicAudio.pause()
+      $musicBtn.removeClass(&#39;move&#39;)
+      clearInterval(autoTimer)
+    &#125;)
+  &#125;)
+
+  //计算当前播放量
+  function computedAlready() &#123;
+    //musicAudio.currentTime: 获取已经播放的时长(秒)
+    var curTime = musicAudio.currentTime,
+        durTime = musicAudio.duration;
+    if (curTime &gt;= durTime) &#123;
+      clearInterval(autoTimer)
+      $duration.html(formatTime(durTime));
+      $current.html(formatTime(durTime));
+      $already.css(&#39;width&#39;, &#39;100%&#39;);
+      $musicBtn.removeClass(&#39;move&#39;);
+      return
+    &#125;
+    $duration.html(formatTime(durTime));
+    $current.html(formatTime(curTime));
+    $already.css(&#39;width&#39;, curTime / durTime * 100 + &#39;%&#39;);
+
+    // --&gt; 歌词对应
+    var ary = formatTime(curTime).split(&#39;:&#39;),
+      minute = ary[0],
+      second = ary[1];
+    var $curLyric = $wrapper.find(&#39;p&#39;)
+      .filter(&#39;[data-minute=&quot;&#39; + minute + &#39;&quot;]&#39;)
+      .filter(&#39;[data-second=&quot;&#39; + second + &#39;&quot;]&#39;);
+    if ($curLyric.length &gt; 0) &#123;
+      if (!$curLyric.hasClass(&#39;select&#39;)) &#123;
+        $curLyric.addClass(&#39;select&#39;)
+          //siblings() 方法返回被选元素的所有同级元素
+          .siblings().removeClass(&#39;select&#39;)
+        step++
+        if (step &gt;= 4) &#123;
+          curTop -= .84
+          $wrapper.css(&#39;top&#39;, curTop + &#39;rem&#39;)
+        &#125;
+      &#125;
+    &#125;
+
+  &#125;
+
+  // 格式化时间
+  function formatTime(time) &#123;
+    var minute = Math.floor(time / 60),
+      second = Math.ceil(time - minute * 60);
+    minute &lt; 10 ? minute = &#39;0&#39; + minute : null;
+    second &lt; 10 ? second = &#39;0&#39; + second : null;
+    return minute + &#39;:&#39; + second;
+  &#125;
+
+  //--&gt;计算MAIN高度
+  function computedMain() &#123;
+    var winH = document.documentElement.clientHeight,
+      font = parseFloat(document.documentElement.style.fontSize);
+    $main.css(&#39;height&#39;, winH - $header[0].offsetHeight - $footer[0].offsetHeight - font * 0.8)
+  &#125;
+
+  return &#123;
+    init: function () &#123;
+      computedMain();
+      $(window).on(&#39;resize&#39;, computedMain);
+
+      //获取歌词，然后进行后续的操作
+      $.ajax(&#123;
+        url: &#39;json/lyric.json&#39;,
+        method: &#39;GET&#39;,
+        dataType: &#39;json&#39;,
+        cache: false,
+        success: function (result) &#123;
+          var lyric = result[&#39;lyric&#39;];
+          $plan.fire(lyric);
+        &#125;
+      &#125;)
+    &#125;
+  &#125;
+&#125;)();
+musicRender.init();
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 驿站
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yuancey
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "",
+        commentCount: false,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
+
+
+
+    
+</body>
+</html>

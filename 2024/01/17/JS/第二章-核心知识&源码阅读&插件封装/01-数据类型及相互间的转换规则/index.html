@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>01-数据类型及相互间的转换规则 | 驿站</title>
+    <meta name="author" content="Yuancey" />
+    <meta name="description" content="写自己的故事" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://cdn.staticfile.org" />
+<script src="https://cdn.staticfile.org/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.loli.net" />
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.staticfile.org/waline/2.15.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline-meta.min.css" />
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>驿站</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;驿站</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>01-数据类型及相互间的转换规则</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/1/17
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E5%89%8D%E7%AB%AF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                前端
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/JS/" style="color: #03a9f4">JS</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+  <div id="toc">
+      <strong class="sidebar-title">目录</strong>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%AF%A6%E7%BB%86%E5%89%96%E6%9E%90"><span class="toc-text">数据类型的详细剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%A0%87%E5%87%86%E5%AE%9A%E4%B9%89"><span class="toc-text">数据类型的标准定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Symbol%E5%92%8CBigInt%E7%9A%84%E5%AE%9E%E8%B7%B5%E8%BF%90%E7%94%A8"><span class="toc-text">Symbol和BigInt的实践运用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#typeof%E6%A3%80%E6%B5%8B%E7%9A%84%E5%BA%95%E5%B1%82%E6%9C%BA%E5%88%B6"><span class="toc-text">typeof检测的底层机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%97%B4%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="toc-text">数据类型间相互转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%8A%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%BANumber"><span class="toc-text">把其他数据类型转换为Number</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%8A%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%BAString"><span class="toc-text">把其他数据类型转换为String</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%8A%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%BABoolean"><span class="toc-text">把其他数据类型转换为Boolean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A3%85%E7%AE%B1%E6%8B%86%E7%AE%B1"><span class="toc-text">装箱拆箱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%9C-x3D-x3D-%E2%80%9D%E6%AF%94%E8%BE%83%E6%97%B6%E5%80%99%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99"><span class="toc-text">“&#x3D;&#x3D;”比较时候的相互转换规则</span></a></li></ol></li></ol>
+  </div>
+
+
+        <p>数据类型及相互间的转换规则</p>
+<span id="more"></span>
+
+<p>学习内容：</p>
+<ul>
+<li>ECMA262数据类型的详细剖析<ul>
+<li>数据类型的标准定义</li>
+<li>Symbol和BigInt的实践运用</li>
+<li>typeof检测的底层机制</li>
+</ul>
+</li>
+<li>数据类型间相互转换的权威解读<ul>
+<li>Number&#x2F;parseInt底层处理机制</li>
+<li>“相等”比较中的类型转换</li>
+<li>JS中的装箱和拆箱操作</li>
+</ul>
+</li>
+<li>几道互联网大厂的经典面试题<br>前端“大神”的成长秘籍<br> 从知识的底层原理&#x2F;机制上去学习和运用<ul>
+<li>不仅仅是知识的深入</li>
+<li>价值观&#x2F;格局 打开</li>
+<li>优秀的思想和经验<br> &#x3D;&#x3D;&#x3D;&#x3D;知其然而知其所以然&#x3D;&#x3D;&#x3D;&#x3D;</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据类型的详细剖析"><a href="#数据类型的详细剖析" class="headerlink" title="数据类型的详细剖析"></a>数据类型的详细剖析</h3><h4 id="数据类型的标准定义"><a href="#数据类型的标准定义" class="headerlink" title="数据类型的标准定义"></a>数据类型的标准定义</h4><ul>
+<li>原始值类型「值类型&#x2F;基本数据类型」<ul>
+<li>number 数字</li>
+<li>string 字符串</li>
+<li>boolean 布尔</li>
+<li>null 空对象指针</li>
+<li>undefined 未定义</li>
+<li>symbol 唯一值</li>
+<li>bigint 大数</li>
+</ul>
+</li>
+<li>对象类型「引用数据类型」<ul>
+<li>标准普通对象 object</li>
+<li>标准特殊对象 Array、RegExp、Date、Math、Error……</li>
+<li>非标准特殊对象 Number、String、Boolean……</li>
+<li>可调用&#x2F;执行对象「函数」function</li>
+</ul>
+</li>
+</ul>
+<h4 id="Symbol和BigInt的实践运用"><a href="#Symbol和BigInt的实践运用" class="headerlink" title="Symbol和BigInt的实践运用"></a>Symbol和BigInt的实践运用</h4><pre><code class="js">/*
+ Symbol 创建一个唯一值
+   + 给对象设置“唯一值”的属性名
+     + 字符串
+     + Symbol类型
+     + Map新的数据结构：可以允许属性名是对象
+   + Symbol.asyncIterator/iterator/hasInstance/toPrimitive/toStringTag...是某些JS知识底层实现的机制
+   + 在派发行为标识统一进行管理的时候，可以基于symbol类型的值，保证行为标识的唯一性
+   + ...
+ */
+// let a1 = Symbol(&#39;AA&#39;);
+// let a2 = Symbol(&#39;AA&#39;);
+// let a3 = a1;
+// console.log(a1 === a2); //false 【只要创建了一个新的Symbol值，肯定是彼此间不相等的】
+// console.log(a1 === a3); //true
+
+/* let key = Symbol(&#39;BB&#39;);
+let obj = &#123;
+    n: 10,
+    10: 100,
+    true: 200,
+    [Symbol(&#39;AA&#39;)]: 300,
+    [Symbol(&#39;AA&#39;)]: 600,
+    [key]: 400
+&#125;;
+console.log(obj[Symbol(&#39;AA&#39;)]); //undefined 【相当于又创建了一个新的Symnol值】
+console.log(obj[key]); //400 */
+
+
+/*
+ BigInt 大数类型 
+    Number.MAX_SAFE_INTEGER  9007199254740991 JS中的最大安全数
+    Number.MIN_SAFE_INTEGER  -9007199254740991 最小安全数
+    超过安全数后，进行运算或者访问，结果会不准确！！！
+    （n的形式）
+
+ 解决方案：
+   1. 服务器返回给客户端的大数，按照“字符串”格式返回！
+   2. 客户端把其变为 BigInt ，然后按照BigInt进行运算
+   3. 最后把运算后的BigInt转换为字符串，在传递给服务器即可
+ */
+// console.log(BigInt(&#39;90071992547409912434234&#39;) + BigInt(12345));
+// console.log((90071992547409912446579n).toString());
+</code></pre>
+<h4 id="typeof检测的底层机制"><a href="#typeof检测的底层机制" class="headerlink" title="typeof检测的底层机制"></a>typeof检测的底层机制</h4><pre><code class="js">/*
+ 平时项目中会涉及数据类型的检测
+   + typeof 
+   + instanceof 
+   + constructor
+   + Object.prototype.toString.call
+   ----
+   + Array.isArray()
+   + isNaN
+   + ...
+
+ typeof检测数据类型
+   + 所有的数据类型值，在计算机底层都是按照 “64位” 的二进制值进行存储的！
+   + typeof是按照二进制值进行检测类型的
+     + 二进制的前三位是零，认为是对象，然后再去看有么有实现call方法，如果实现了，返回 &#39;function&#39;，没有实现，则返回 &#39;object&#39;
+     + null是64个零  typeof null -&gt; &#39;object&#39; 「局限性」
+     + ...
+   + 检测未被声明的变量，值是&#39;undefined&#39;
+ */
+// console.log(a); //Uncaught ReferenceError: a is not defined
+// console.log(typeof a); //&#39;undefined&#39;
+
+typeof的适用性
+只适合检测基本数据类型值（null除外--&gt;object）
+typeof的局限性
+1、不能细分对象类型中的具体类型 对象、数组、正则
+2、typeof能检测funtion
+
+
+/* // 场景一：检测当前值是否是一个对象
+const fn = options =&gt; &#123;
+    let type = typeof options;
+    if (options !== null &amp;&amp; (type === &quot;object&quot; || type === &quot;function&quot;)) &#123;
+        // 是个对象
+    &#125;
+&#125;;
+fn(&#123;
+    x: 10,
+    y: 20
+&#125;);
+fn(10); */
+
+/* // 场景二：支持更多的模块导入方案
+(function () &#123;
+    let utils = &#123;&#125;;
+
+    if (typeof window !== &quot;undefined&quot;) window.utils = utils;
+    if (typeof module === &quot;object&quot; &amp;&amp; typeof module.exports === &quot;object&quot;) 
+module.exports = utils; &#125;)(); 
+*/
+</code></pre>
+<ul>
+<li>特点1：返回的结果是字符串，字符串中包含了对应的数据类型<ul>
+<li>typeof typeof typeof [1,2,3]</li>
+</ul>
+</li>
+<li>特点2：按照计算机底层存储的二进制进行检测「效率高」<ul>
+<li>计算机科学：计算机原理、进制转化、计算机网络、数据结构和算法……</li>
+<li>000 对象</li>
+<li>1 整数</li>
+<li>010 浮点数</li>
+<li>100 字符串</li>
+<li>110 布尔</li>
+<li>000000…. null</li>
+<li>-2^30 undefined</li>
+<li>……</li>
+</ul>
+</li>
+<li>特点3：typeof null -&gt; “object”</li>
+<li>特点4：typeof 对象 -&gt; “object” &amp;&amp; typeof 函数 -&gt; “function”<ul>
+<li>验证是否是对象的判断</li>
+</ul>
+</li>
+<li>特点5：typeof 未被声明的变量 -&gt; “undefined”<ul>
+<li>插件封装中的暴露API</li>
+</ul>
+</li>
+</ul>
+<pre><code class="js">       typeof 1 //&#39;number&#39;
+       typeof NaN //&#39;number&#39;
+       typeof Infinity //&#39;number&#39;
+       typeof &#39;&#39; //&#39;string&#39;
+       typeof true //&#39;boolean&#39;
+       typeof false //&#39;boolean&#39;
+        typeof null //&#39;object&#39;
+       typeof undefined //&#39;undefined&#39;
+        typeof Symbol() //&#39;symbol&#39;
+        typeof 10n //&#39;bigint&#39;
+        typeof &#123;&#125; //&#39;object&#39;
+        typeof [] //&#39;object&#39;
+        typeof new Number() //&#39;object&#39;
+        typeof function() &#123;&#125; //&#39;function&#39;
+</code></pre>
+<h3 id="数据类型间相互转换"><a href="#数据类型间相互转换" class="headerlink" title="数据类型间相互转换"></a>数据类型间相互转换</h3><h4 id="把其他数据类型转换为Number"><a href="#把其他数据类型转换为Number" class="headerlink" title="把其他数据类型转换为Number"></a>把其他数据类型转换为Number</h4><pre><code class="js">    Number([val])
+        + 一般用于浏览器的隐式转换中
+    @1 数学运算
+    @2 isNaN检测
+    @3 == 比较
+    ...
+    + 规则：
+    @1 字符串转换为数字：空字符串变为0，如果出现任何非有效数字字符，结果都是NaN
+    @2 把布尔转换为数字：true -&gt; 1  false -&gt; 0
+    @3 null -&gt; 0  undefined -&gt; NaN
+    @4 Symbol无法转换为数字，会报错：Uncaught TypeError: Cannot convert a Symbol value to a number
+    @5 BigInt去除“n”（超过安全数字的，会按照科学计数法处理）
+    @6 把对象转换为数字：
+    + 先调用对象的 Symbol.toPrimitive 这个方法，如果不存在这个方法
+        + 再调用对象的 valueOf 获取原始值，如果获取的值不是原始值
+            + 再调用对象的 toString 把其变为字符串
+                + 最后再把字符串基于Number方法转换为数字
+
+    parseInt([val], [radix])  parseFloat([val])
+        + 一般用于手动转换
+        + 规则：[val]值必须是一个字符串，如果不是则先转换为字符串；然后从字符串左侧第一个字符开始找，把找到的有效数字字符最后转换为数字「一个都没找到就是NaN」；
+遇到一个非有效数字字符，不论后面是否还有有效数字字符，都不再查找了parseFloat可以多识别一个小数点；
+    parseFloat([val])
++ 无进制，默认是10进制
+    一般在阅读别人源码时，对parseInt([val],10)会默认将其转化为10进制，避免其他特殊情况。
+
+    练习题：
+    let arr = [27.2, 0, &#39;0013&#39;, &#39;14px&#39;, 123];
+    arr = arr.map(parseInt);
+</code></pre>
+<p>应用</p>
+<pre><code class="js">// let time = new Date();
+// console.log(Number(time));
+/*
+ 首先检测 Symbol.toPrimitive 有没有，结果：有，而且是个函数
+   time[Symbol.toPrimitive](&#39;number&#39;)
+*/
+
+// let arr = [10];
+// console.log(Number(arr));
+/*
+ 首先 arr[Symbol.toPrimitive] -&gt; undefined
+ 其次 arr.valueOf() 获取原始值 -&gt; [10] 不是原始值
+ 再此 arr.toString() 转换为字符串 -&gt; &#39;10&#39;
+ 最后 再把字符串‘10’转化为数字 -&gt; 10
+ */
+
+// let num = new Number(10);
+// console.log(Number(num));
+/*
+ 首先 num[Symbol.toPrimitive] -&gt; undefined
+ 其次 num.valueOf() -&gt; 10
+ */
+//==================
+/*
+ parseInt([val],[radix])
+   + [val]必须是字符串，如果不是，要先隐式转换为字符串 String([val])
+   + [radix]进制
+     + 如果不写，或者写零：默认是10（特殊情况：如果字符串是以0x开始的，默认值是16）
+     + 有效范围：2~36之间（2-36是进制，如果不在这个区间，结果直接是NaN）
+   + 从[val]字符串左侧第一个字符开始查找，查找出符合[radix]进制的值(遇到不符合的则结束查找，不论后面是否还有符合的)；把找到的内容，按照[radix]进制，转换为10进制！！
+ */
+/* console.log(parseInt(&#39;10102px13&#39;, 2)); //10
+// 找到符合二进制的 &#39;1010&#39;
+// 把这个二进制的值转换为10进制 “按权展开求和”
+// 1*2^3+0*2^2+1*2^1+0*2^0 =&gt; 8+0+2+0 =&gt; 10 */
+
+// let arr = [27.2, 0, &#39;0013&#39;, &#39;14px&#39;, 123];
+// arr = arr.map(parseInt);
+// console.log(arr); //[27, NaN, 1, 1, 27]
+/*
+ parseInt(27.2,0) -&gt; parseInt(&#39;27.2&#39;,10)
+   &#39;27&#39; 把其当做10进制转换为10进制 =&gt; 27
+ parseInt(0,1)//不在2-36区间
+    NaN
+ parseInt(&#39;0013&#39;,2)
+    &#39;001&#39; 当做2进制转换为10进制
+    0*2^2+0*2^1+1*2^0 -&gt; 0+0+1 =&gt; 1
+ parseInt(&#39;14px&#39;,3)
+    &#39;1&#39; 当做3进制转换为10进制
+    1*3^0 -&gt; 1
+ parseInt(123,4) -&gt; parseInt(&#39;123&#39;,4)
+    &#39;123&#39; 当做4进制转换为10进制
+    1*4^2+2*4^1+3*4^0 -&gt; 16+8+3 =&gt; 27
+*/
+// JS中遇到以0开始“数字”，会默认把其按照8进制转为10进制，然后在进行其他操作
+// parseInt(0013,2) 
+//   先8转10  0*8^3+0*8^2+1*8^1+3*8^0 -&gt; 0+0+8+3 =&gt; 11
+// parseInt(&#39;11&#39;,2)
+//   &#39;11&#39;
+//   在2转10  1*2^1+1*2^0 -&gt; 2 + 1 -&gt; 3
+//===========
+// parseInt([val],10) //=&gt;强制让其变为10进制 【排除特殊情况的干扰】
+</code></pre>
+<p>补充：</p>
+<ul>
+<li>为n进制时，符合n进制的数为1、2、…、n-1</li>
+<li>当做n进制转化为10进制   abc   a<em>n^(位数-1) + b</em>n^(位数-1)+ c*n^(位数-1) &#x3D;&#x3D;&gt;求和</li>
+</ul>
+<h4 id="把其他数据类型转换为String"><a href="#把其他数据类型转换为String" class="headerlink" title="把其他数据类型转换为String"></a>把其他数据类型转换为String</h4><pre><code class="js">        转化规则：
+        @1 拿字符串包起来
+        @2 特殊：Object.prototype.toString
+        出现情况：
+        @1 String([val]) 或者[val].toString()
+        @2 “+”除数学运算，还可能代表的字符串拼接
+            + 有两边，一边是字符串
+                + 有两边，一边是对象
+                    + 只出现在左边
+                    + ...
+    ...
+
+        练习题：
+        let result = 100 + true + 21.2 + null + undefined + &quot;Tencent&quot; + [] + null + 9 + false;
+        console.log(result);
+</code></pre>
+<p>应用</p>
+<pre><code class="js">/*
+ “+” 出现左右“两边”，其中一边是字符串，或者是某些对象：会以字符串拼接的规则处理
+ “+” 出现在一个值的左边，转换为数字
+ */
+// let num = &#39;10&#39;;
+// console.log(+num); //10
+
+/* let i = &#39;10&#39;;
+i++; //一定是数学运算
+console.log(i); //11
+
+i = &#39;10&#39;;
+i += 1;
+console.log(i); //&#39;101&#39;
+
+i = &#39;10&#39;;
+i = i + 1;
+console.log(i); //&#39;101&#39; */
+//1、++一定是数学运算
+//2、+= =+ 则是字符串运算
+
+/* let result = 100 + true + 21.2 + null + undefined + &quot;Tencent&quot; + [] + null + 9 + false;
+// NaN+&quot;Tencent&quot; -&gt; &quot;NaNTencent&quot;
+// NaN加上任何值都是NaN
+// 都是字符串拼接
+console.log(result); //&quot;NaNTencentnull9false&quot; */
+
+/* console.log(10 + &quot;10&quot;); //&quot;1010&quot;
+console.log(10 + new Number(10)); //20
+// new Number(10)[Symbol.toPrimitive] -&gt; undefined
+// new Number(10).valueOf() -&gt; 10
+// 10+10 =&gt; 20
+console.log(10 + new Date()); //&#39;10Wed Apr 06 2022 22:01:38 GMT+0800 (中国标准时间)&#39;
+// new Date()[Symbol.toPrimitive](&#39;default&#39;) -&gt; &#39;Wed Apr 06 2022 22:01:38 GMT+0800 (中国标准时间)&#39;
+console.log(10 + [10]); //&#39;1010&#39;
+// [10].toString() -&gt; &#39;10&#39;  =&gt; 10+&#39;10&#39;  */
+</code></pre>
+<p>补充：<br>Symbol.toPrimitive()</p>
+<ul>
+<li>有3个参数：number、string、default</li>
+<li>如果明确知道转换规则，则number&#x2F;string, 如果不明确，则传default 【示例中的则是不明确规则，则传default】</li>
+</ul>
+<h4 id="把其他数据类型转换为Boolean"><a href="#把其他数据类型转换为Boolean" class="headerlink" title="把其他数据类型转换为Boolean"></a>把其他数据类型转换为Boolean</h4><pre><code class="js">转换规则：除了“0 / NaN / 空字符串 / null / undefined”五个值是false，其余都是true
+    出现情况：
+    @1 Boolean([val]) 或者! / !!
+    @2 条件判断
+    ...
+</code></pre>
+<p>应用</p>
+<pre><code class="js">/* 
+const fn = (num) =&gt; &#123;
+    if (num == null) &#123;
+        // num是null或者undefined
+    &#125;
+&#125;; 
+*/
+
+// console.log(NaN == NaN);//false
+// console.log(Object.is(NaN, NaN)); //true
+
+/* //==========
+console.log([] == false); //都转换为数字  0==0  =&gt; true
+console.log(![] == false); //先处理 ![]=&gt;false  false==false =&gt; true
+![] 先转换为布尔类型，Boolean([])--&gt;true; 再取反
+ */
+</code></pre>
+<h4 id="装箱拆箱"><a href="#装箱拆箱" class="headerlink" title="装箱拆箱"></a>装箱拆箱</h4><pre><code class="js">//===========装箱拆箱======
+装箱：把原始值，变为非标准特殊对象
+拆箱：把非标砖特殊对象变为原始值
+/* let num = 10;
+console.log(num.toFixed(2)); //10.00
+// num是原始值，不是对象，按常理来讲，是不能做“成员访问” 【成员访问：xx.xx 以点的方式调用】
+// 默认装箱操作：new Number(num) 变为非标准特殊对象，这样就可以调用toFixed了 */
+
+/* let num = new Number(10);
+console.log(num + 10); //20
+// 在操作的过程中，浏览器会把num这个非标准特殊对象变为原始值「Symbol.toPrimitive-&gt;valueOf...」,这个操作叫做拆箱 */
+
+//=&gt; 装箱、拆箱，是浏览器默认的隐式转换
+</code></pre>
+<h4 id="“-x3D-x3D-”比较时候的相互转换规则"><a href="#“-x3D-x3D-”比较时候的相互转换规则" class="headerlink" title="“&#x3D;&#x3D;”比较时候的相互转换规则"></a>“&#x3D;&#x3D;”比较时候的相互转换规则</h4><pre><code class="js">        “==”相等，两边数据类型不同，需要先转为相同类型，然后再进行比较
+        @1 对象 == 字符串  对象转字符串「Symbol.toPrimitive -&gt; valueOf -&gt; toString」
+        @2 null == undefined -&gt; true   null / undefined和其他任何值都不相等
+        null === undefined -&gt; false
+        @3 对象 == 对象  比较的是堆内存地址，地址相同则相等
+        @4 NaN !== NaN
+        @5 除了以上情况，只要两边类型不一致，剩下的都是转换为数字，然后再进行比较的
+        “===”绝对相等，如果两边类型不同，则直接是false，不会转换数据类型「推荐」
+
+        练习题：
+        console.log([] == false);
+        console.log(![] == false);
+</code></pre>
+<p>综合练习题</p>
+<pre><code class="js">        var a = ?;
+        if (a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3) &#123;
+            console.log(&#39;OK&#39;);
+        &#125;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 驿站
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yuancey
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "",
+        commentCount: false,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
+
+
+
+    
+</body>
+</html>
