@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>01-事件和事件绑定 | 驿站</title>
+    <title>面试题集-Vue | 驿站</title>
     <meta name="author" content="Yuancey" />
     <meta name="description" content="写自己的故事" />
     <meta name="keywords" content="" />
@@ -154,22 +154,22 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>01-事件和事件绑定</h1>
+        <h1>面试题集-Vue</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/1/17
+            2024/3/11
         </span>
         
         <span class="category">
-            <a href="/categories/%E5%89%8D%E7%AB%AF/">
+            <a href="/categories/%E9%9D%A2%E8%AF%95/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                前端
+                面试
             </a>
         </span>
         
@@ -182,7 +182,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/JS/" style="color: #ff7d73">JS</a>
+                <a href="/tags/Vue/" style="color: #00bcd4">Vue</a>
             </span>
             
         </span>
@@ -193,108 +193,48 @@
         
   <div id="toc">
       <strong class="sidebar-title">目录</strong>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-text">前端常用工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%EF%BC%9F"><span class="toc-text">1. 什么是事件？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%EF%BC%9F"><span class="toc-text">2. 什么是事件绑定？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-text">3. 事件对象</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">Vue核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%B0%88%E8%B0%88%E5%AF%B9vue%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">1、谈谈对vue的理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81SPA"><span class="toc-text">2、SPA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%99%9A%E6%8B%9Fdom"><span class="toc-text">3、虚拟dom</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="toc-text">4、组件化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E6%97%A2%E7%84%B6-Vue-%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E5%8A%AB%E6%8C%81%E5%8F%AF%E4%BB%A5%E7%B2%BE%E5%87%86%E6%8E%A2%E6%B5%8B%E6%95%B0%E6%8D%AE%E5%8F%98%E5%8C%96%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E8%99%9A%E6%8B%9F-DOM-%E8%BF%9B%E8%A1%8C-diff-%E6%A3%80%E6%B5%8B%E5%B7%AE%E5%BC%82%EF%BC%9F"><span class="toc-text">5、既然 Vue 通过数据劫持可以精准探测数据变化，为什么还需要虚拟 DOM 进行 diff 检测差异？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">6、响应式数据的理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81Vue%E7%9B%91%E5%90%AC%E6%95%B0%E7%BB%84%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-text">7、Vue监听数组的变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81%E5%A6%82%E4%BD%95%E5%B0%86-template-%E8%BD%AC%E6%8D%A2%E6%88%90-render"><span class="toc-text">8、如何将 template 转换成 render</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81Vue%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BE%9D%E8%B5%96%E6%94%B6%E9%9B%86"><span class="toc-text">9、Vue如何进行依赖收集</span></a></li></ol></li></ol>
   </div>
 
 
-        <p>事件和事件绑定</p>
+        <p>Vue核心面试题</p>
 <span id="more"></span>
 
-<h2 id="前端常用工具"><a href="#前端常用工具" class="headerlink" title="前端常用工具"></a>前端常用工具</h2><p>学习内容：</p>
-<blockquote>
+<h3 id="Vue核心概念"><a href="#Vue核心概念" class="headerlink" title="Vue核心概念"></a>Vue核心概念</h3><h4 id="1、谈谈对vue的理解"><a href="#1、谈谈对vue的理解" class="headerlink" title="1、谈谈对vue的理解"></a>1、谈谈对vue的理解</h4><ul>
+<li>声明式框架</li>
+<li>MVVM模式</li>
+<li>虚拟DOM</li>
+<li>区分编译时（打包）和运行（浏览器）时<br>vue的渲染核心时调用render方法将虚拟dom渲染成真实dom(缺点就是虚拟dom编写麻烦)。<br>专门写个【编译时可以将模板编译成虚拟dom】(在构建的时候进行编译性能更高，不需要再运行的时候进行编译。)</li>
+<li>组件化</li>
+</ul>
+<h4 id="2、SPA"><a href="#2、SPA" class="headerlink" title="2、SPA"></a>2、SPA</h4><p><img src="https://yuancey.oss-cn-beijing.aliyuncs.com/img/image-20240311145454328.png" alt="image-20240311145454328"></p>
+<h4 id="3、虚拟dom"><a href="#3、虚拟dom" class="headerlink" title="3、虚拟dom"></a>3、虚拟dom</h4><p>用js对象来描述真实dom,是对真实dom的抽象。直接操作dom性能低，通过diff算法比对差异，更新dom。</p>
+<p><img src="https://yuancey.oss-cn-beijing.aliyuncs.com/img/image-20240311150014608.png" alt="image-20240311150014608"></p>
+<h4 id="4、组件化"><a href="#4、组件化" class="headerlink" title="4、组件化"></a>4、组件化</h4><p>好处：高内聚、复用性、开发性、测试性</p>
+<p><img src="https://yuancey.oss-cn-beijing.aliyuncs.com/img/image-20240311162107066.png" alt="image-20240311162107066"></p>
+<h4 id="5、既然-Vue-通过数据劫持可以精准探测数据变化，为什么还需要虚拟-DOM-进行-diff-检测差异？"><a href="#5、既然-Vue-通过数据劫持可以精准探测数据变化，为什么还需要虚拟-DOM-进行-diff-检测差异？" class="headerlink" title="5、既然 Vue 通过数据劫持可以精准探测数据变化，为什么还需要虚拟 DOM 进行 diff 检测差异？"></a>5、既然 Vue 通过数据劫持可以精准探测数据变化，为什么还需要虚拟 DOM 进行 diff 检测差异？</h4><p>Vue 内部设计原因导致，<code>vue 设计的是每个组件一个 watcher（渲染 watcher），没有采用一个属性对应一个 watcher。这样会导致大量 watcher 的产生而且浪费内存</code>，如果粒度过低也无法精准检测变化。所以采用 diff 算法 + 组件级 watcher。</p>
+<h4 id="6、响应式数据的理解"><a href="#6、响应式数据的理解" class="headerlink" title="6、响应式数据的理解"></a>6、响应式数据的理解</h4><p>Vue2: 对象采用Object.defineProperty将属性进行劫持（已存在属性），深层对象则用递归进行处理；数组则是对数组方法进行重写。<br>Vue3: Proxy</p>
+<p>Vue2缺陷：</p>
 <ul>
-<li>什么是事件<br>– 鼠标事件<br>– 键盘事件<br>– 手指事件<br>– 表单事件</li>
-<li>什么是事件绑定</li>
-<li>事件对象</li>
+<li>新增、删除对象属性无法监控变化。$set、$delete</li>
+<li>数组无法通过defineProperty进行劫持，需要对数组进行单独处理</li>
+<li>对数组新增的Map、Set属性不支持。</li>
+<li>在 Vue2 的时候使用 defineProperty 来进行数据的劫持, 需要对属性进行重写添加getter及setter 性能差。</li>
 </ul>
-</blockquote>
-<h3 id="1-什么是事件？"><a href="#1-什么是事件？" class="headerlink" title="1. 什么是事件？"></a>1. 什么是事件？</h3><p>   事件是浏览器赋予元素的默认行为，也可以理解为事件是天生具备的，不论我们是否为其绑定方法，当某些行为触发的时候，相关的事件都会被触发执行！</p>
-<p>　「浏览器赋予元素的事件行为」<br>   <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Events">https://developer.mozilla.org/zh-CN/docs/Web/Events</a></p>
+<h4 id="7、Vue监听数组的变化"><a href="#7、Vue监听数组的变化" class="headerlink" title="7、Vue监听数组的变化"></a>7、Vue监听数组的变化</h4><p>Vue2:重写数组的方法：push,shift,pop,splice,unshift,sort,reverse<br>Vue3： proxy可以监听数组长度和索引的变化。（（但是由于代理问题，还需要对部分检测方法进行重写）。）</p>
+<h4 id="8、如何将-template-转换成-render"><a href="#8、如何将-template-转换成-render" class="headerlink" title="8、如何将 template 转换成 render"></a>8、如何将 template 转换成 render</h4><p>Vue 中含有模版编译的功能，它的主要作用是将用户编写的 template 编译为 js 中可执行的 render 函数。<br>Vue 中的模版转化流程<br>1.将 template 模板转换成ast语法树 - parserHTML<br>2.Vue2 对静态语法做静态标记 - optimize &#x2F; Vue3 对 ast 语法进行转化 - transform<br>3.重新生成代码 - codeGen</p>
+<h4 id="9、Vue如何进行依赖收集"><a href="#9、Vue如何进行依赖收集" class="headerlink" title="9、Vue如何进行依赖收集"></a>9、Vue如何进行依赖收集</h4><p>依赖收集的流程：</p>
 <ul>
-<li>鼠标事件<ul>
-<li>click 点击事件(PC:频繁点击N次，触发N次点击事件) 单击事件(移动端:300ms内没有发生第二次点击操作，算作单击事件行为，所以click在移动端有300ms延迟)</li>
-<li>dblclick 双击事件</li>
-<li>contextmenu 鼠标右键点击触发</li>
-<li>mousedown 鼠标按下</li>
-<li>mouseup 鼠标抬起</li>
-<li>mousemove 鼠标移动</li>
-<li>mouseover 鼠标滑入</li>
-<li>mouseover 鼠标滑出</li>
-<li>mouseenter 鼠标进入</li>
-<li>mouseleave 鼠标离开</li>
-<li>wheel 鼠标滚轮滚动</li>
-<li>…</li>
+<li>每个属性都拥有自己的<code>dep</code>属性，存放他所依赖的watcher,当属性变化后会通知对应的watcher去更新。</li>
+<li>默认在初始化时会调用render函数，此时会触发属性依赖收集<code>dep.depend</code></li>
+<li>当属性发生修改时会触发<code>watcher</code>更新<code>dep.notify</code></li>
 </ul>
-</li>
-<li>键盘事件<ul>
-<li>keydown 键盘按下</li>
-<li>keyup 键盘抬起</li>
-<li>keypress 长按（除了Shift&#x2F;Fn&#x2F;CapsLock键之外）</li>
-<li>…</li>
-</ul>
-</li>
-<li>手指事件<br>「Touch Event 单手指事件模型」<ul>
-<li>touchstart 手指按下</li>
-<li>touchmove 手指移动</li>
-<li>touchend 手指松开<br>  「Gesture Event 多手指事件模型」</li>
-</ul>
-</li>
-<li>表单事件<ul>
-<li>focus 获取焦点</li>
-<li>blur 失去焦点</li>
-<li>submit 表单提交（前提：表单元素都包含在form中，并且点击的按钮是submit）</li>
-<li>reset 表单重置（前提：表单元素都包含在form中，并且点击的按钮是reset）</li>
-<li>select 下拉框内容选中</li>
-<li>change 内容改变</li>
-<li>input 移动端中经常使用的，监控文本框中的内容随着输入的改变而触发</li>
-<li>…</li>
-</ul>
-</li>
-<li>资源事件<ul>
-<li>load 加载成功（window.onload &#x2F; img.onload）</li>
-<li>error 加载失败</li>
-<li>beforeunload 资源卸载之前（window.onbeforeunload 页面关闭之前触发）</li>
-<li>…</li>
-</ul>
-</li>
-<li>CSS3动画事件<ul>
-<li>transitionend  transition动画结束</li>
-<li>transitionstart transition动画开始</li>
-<li>transitionrun  transition动画运行中</li>
-<li>…</li>
-</ul>
-</li>
-<li>视图事件<ul>
-<li>resize 元素(浏览器)大小改变</li>
-<li>scroll 滚动条滚动</li>
-<li>…</li>
-</ul>
-</li>
-<li>…</li>
-</ul>
-<h3 id="2-什么是事件绑定？"><a href="#2-什么是事件绑定？" class="headerlink" title="2. 什么是事件绑定？"></a>2. 什么是事件绑定？</h3><p>   给元素默认的事件行为绑定方法，这样可以在行为触发的时候，执行这个方法！</p>
+<p>Vue3依赖收集</p>
 <ul>
-<li><p>DOM0级事件绑定<br>语法：[元素].on[事件]&#x3D;[函数]<br>document.body.onclick&#x3D;function(){}</p>
-<p>移除绑定：赋值为null或者其他非函数值皆可<br>document.body.onclick&#x3D;null</p>
-<p>原理：每一个DOM元素对象的私有属性上都有很多类似于“onxxx”的私有属性，我们给这些代表事件的私有属性赋值，就是DOM0事件绑定</p>
-<ul>
-<li>如果没有对应事件的私有属性值（例如：DOMContentLoaded）则无法基于这种办法实现事件绑定</li>
-<li>只能给当前元素的某个事件行为绑定一个方法，绑定多个方法，最后一个操作会覆盖以往的</li>
-<li>好处是执行效率快，而且开发者使用起来方便</li>
+<li>Vue中会通过Map结构将属性和effect映射起来</li>
+<li>默认在初始化时会调用render函数，此时会触发属性依赖收集track</li>
+<li>当属性发生修改时会找到对应的effect列表依次执行trigger</li>
 </ul>
-</li>
-<li><p>DOM2级事件绑定<br>语法：[元素].addEventListener([事件],[方法],[捕获&#x2F;冒泡])<br>document.body.addEventListener(‘click’,fn1,false);</p>
-<p>移除：[元素].removeEventListener([事件],[方法],[捕获&#x2F;冒泡])  但是需要参数和绑定的时候一样<br>document.body.removeEventListener(‘click’,fn1,false);</p>
-<p>原理：每一个DOM元素都会基于__proto__，查找到EventTarget.prototype上的addEventListener&#x2F;removeEventListener等方法，基于这些方法实现事件的绑定和移除；DOM2事件绑定采用事件池机制；</p>
-<ul>
-<li>DOM2事件绑定，绑定的方法一般不是匿名函数，主要目的是方便移除事件绑定的时候使用</li>
-<li>凡是浏览器提供的事件行为，都可以基于这种模式完成事件的绑定和移除（例如：window.onDOMContentLoaded是不行的，因为没有这个私有的事件属性，但是我么可以 window.addEventListener(‘DOMContentLoaded’,func) 这样是可以的）</li>
-<li>可以给当前元素的某个事件类型绑定多个“不同”的方法（进入到事件池），这样当事件行为触发，会从事件池中依次(按照绑定的顺序)取出</li>
-</ul>
-</li>
-</ul>
-<p>对应的方法然后执行</p>
-<h3 id="3-事件对象"><a href="#3-事件对象" class="headerlink" title="3. 事件对象"></a>3. 事件对象</h3><p>   给当前元素的某个事件行为绑定方法，当事件行为触发，不仅会把绑定的方法执行，而且还会给方法默认传递一个实参，而这个实参就是事件对象</p>
 
     </div>
     

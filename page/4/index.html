@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Date | 驿站</title>
+    <title>驿站</title>
     <meta name="author" content="Yuancey" />
     <meta name="description" content="写自己的故事" />
     <meta name="keywords" content="" />
@@ -36,13 +36,7 @@
 
 
 
-
-<script src="https://cdn.staticfile.org/waline/2.15.8/waline.min.js"></script>
-<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline.min.css" />
-<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.15.8/waline-meta.min.css" />
-
-
-
+<script src="/js/lib/home.js"></script>
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -152,94 +146,166 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>Date</h1>
+            <div id="home-head">
+    <div id="home-background" ref="homeBackground" data-images="/images/background.jpg"></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>驿站</h1>
+                <h3>栖息地</h3>
+                <h5>写自己的故事</h5>
+            </div>
+        </span>
     </div>
-    <div class="info">
+</div>
+<div id="home-posts-wrap" true ref="homePostsWrap">
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2023/12/22/hexo/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E5%8D%97/">
+        <h2 class="post-title">Hexo食用指南</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/hexo/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                hexo
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/1/16
+            2023/12/22
         </span>
         
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Hexo常用指南</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%8C%87%E5%8D%97/" style="color: #00a596">指南</a>
+        </span>
+        
+    </div>
+    <a href="/2023/12/22/hexo/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E5%8D%97/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/12/21/hexo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/">
+        <h2 class="post-title">Hexo搭建个人网站</h2>
+    </a>
+    <div class="category-and-date">
+        
         <span class="category">
-            <a href="/categories/%E5%89%8D%E7%AB%AF/">
+            <a href="/categories/hexo/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                前端
+                hexo
             </a>
         </span>
         
-        
-        <span class="tags">
+        <span class="date">
             <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
+                <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
+            2023/12/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
             
+            <p>Welcome to my very first bolg ! </p>
             
-            <span class="tag">
-                
-                <a href="/tags/JS/" style="color: #ffa2c4">JS</a>
-            </span>
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
             
-            <span class="tag">
-                
-                <a href="/tags/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/" style="color: #00bcd4">日常学习</a>
-            </span>
-            
+            <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="color: #ff7d73">网站搭建</a>
         </span>
         
     </div>
+    <a href="/2023/12/21/hexo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
     
-    <div class="content" v-pre>
+    <a class="page-num" href="/page/3/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">4</span>
+    
+    
+    
+    
+</div>
+
+    </div>
+    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="/images/avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">Yuancey</div>
+        <div class="description">
+            <p>Description<br>…</p>
+
+        </div>
         
-  <div id="toc">
-      <strong class="sidebar-title">目录</strong>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Date-setDate"><span class="toc-text">Date.setDate()</span></a></li></ol>
-  </div>
-
-
-        <p>Date用法</p>
-<span id="more"></span>
-
-<h1 id="Date-setDate"><a href="#Date-setDate" class="headerlink" title="Date.setDate()"></a>Date.setDate()</h1><p>setDate() 方法用于设置一个月的某一天</p>
-<p>基本适用:</p>
-<pre><code class="js">
-var d = new Date();
-
-console.log(&quot;---d---&quot;,d);   //2024-01-16T03:30:08.832Z
-
-d.setDate(15);
-
-console.log(&quot;---d---&quot;,d);   //2024-01-15T03:30:38.566Z
-</code></pre>
-<p>应用：可以设置某个日期的前几天，后几天</p>
-<pre><code class="js">// 例：当前日期的前13天 |  近14天
-function getDate(index) &#123;
-  const date = new Date();
-  const newDate = new Date();
-  newDate.setDate(date.getDate() + index);
-  const beg = newDate.getFullYear() + &quot;-&quot; + ((newDate.getMonth() + 1 &lt; 10 ? &#39;0&#39;+(newDate.getMonth() + 1): newDate.getMonth() + 1 )) + &quot;-&quot; + (newDate.getDate() &lt; 10? &#39;0&#39; + newDate.getDate(): newDate.getDate());
-  const end = date.getFullYear() + &quot;-&quot; + ((date.getMonth() + 1 &lt; 10 ? &#39;0&#39;+(date.getMonth() + 1): date.getMonth() + 1 )) + &quot;-&quot; + (date.getDate() &lt; 10? &#39;0&#39; + date.getDate(): date.getDate());
-  return [beg, end];
-&#125;
-console.log(getDate(-13));  //[ &#39;2024-01-03&#39;, &#39;2024-01-16&#39; ]
-</code></pre>
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
 
     </div>
-    
-    
-    
-    
-    
-    <div id="comment">
-        <div id="waline-container"></div>
-    </div>
-    
-    
     
 </div>
 
@@ -271,29 +337,6 @@ console.log(getDate(-13));  //[ &#39;2024-01-03&#39;, &#39;2024-01-16&#39; ]
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-<script>
-    Waline.init({
-        el: "#waline-container",
-        serverURL: "",
-        commentCount: false,
-        pageview: false,
-        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
-        meta: "nick,mail,link".split(","),
-        requiredMeta: "nick".split(","),
-        lang: "",
-        wordLimit: 0,
-        pageSize: "10",
-        login: "enable",
-        
-    });
-</script>
-
-
-
     
 </body>
 </html>
