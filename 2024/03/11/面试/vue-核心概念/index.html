@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>面试题集-Vue | 驿站</title>
+    <title>Vue-核心概念 | 驿站</title>
     <meta name="author" content="Yuancey" />
     <meta name="description" content="写自己的故事" />
     <meta name="keywords" content="" />
@@ -154,7 +154,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>面试题集-Vue</h1>
+        <h1>Vue-核心概念</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -182,7 +182,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Vue/" style="color: #00bcd4">Vue</a>
+                <a href="/tags/Vue/" style="color: #ff7d73">Vue</a>
             </span>
             
         </span>
@@ -193,7 +193,7 @@
         
   <div id="toc">
       <strong class="sidebar-title">目录</strong>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">Vue核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%B0%88%E8%B0%88%E5%AF%B9vue%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">1、谈谈对vue的理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81SPA"><span class="toc-text">2、SPA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%99%9A%E6%8B%9Fdom"><span class="toc-text">3、虚拟dom</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="toc-text">4、组件化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E6%97%A2%E7%84%B6-Vue-%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E5%8A%AB%E6%8C%81%E5%8F%AF%E4%BB%A5%E7%B2%BE%E5%87%86%E6%8E%A2%E6%B5%8B%E6%95%B0%E6%8D%AE%E5%8F%98%E5%8C%96%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E8%99%9A%E6%8B%9F-DOM-%E8%BF%9B%E8%A1%8C-diff-%E6%A3%80%E6%B5%8B%E5%B7%AE%E5%BC%82%EF%BC%9F"><span class="toc-text">5、既然 Vue 通过数据劫持可以精准探测数据变化，为什么还需要虚拟 DOM 进行 diff 检测差异？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">6、响应式数据的理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81Vue%E7%9B%91%E5%90%AC%E6%95%B0%E7%BB%84%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-text">7、Vue监听数组的变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81%E5%A6%82%E4%BD%95%E5%B0%86-template-%E8%BD%AC%E6%8D%A2%E6%88%90-render"><span class="toc-text">8、如何将 template 转换成 render</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81Vue%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BE%9D%E8%B5%96%E6%94%B6%E9%9B%86"><span class="toc-text">9、Vue如何进行依赖收集</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">Vue核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%B0%88%E8%B0%88%E5%AF%B9vue%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">1、谈谈对vue的理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81SPA"><span class="toc-text">2、SPA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%99%9A%E6%8B%9Fdom"><span class="toc-text">3、虚拟dom</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="toc-text">4、组件化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E6%97%A2%E7%84%B6-Vue-%E9%80%9A%E8%BF%87%E6%95%B0%E6%8D%AE%E5%8A%AB%E6%8C%81%E5%8F%AF%E4%BB%A5%E7%B2%BE%E5%87%86%E6%8E%A2%E6%B5%8B%E6%95%B0%E6%8D%AE%E5%8F%98%E5%8C%96%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E8%99%9A%E6%8B%9F-DOM-%E8%BF%9B%E8%A1%8C-diff-%E6%A3%80%E6%B5%8B%E5%B7%AE%E5%BC%82%EF%BC%9F"><span class="toc-text">5、既然 Vue 通过数据劫持可以精准探测数据变化，为什么还需要虚拟 DOM 进行 diff 检测差异？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">6、响应式数据的理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81Vue%E7%9B%91%E5%90%AC%E6%95%B0%E7%BB%84%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-text">7、Vue监听数组的变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81%E5%A6%82%E4%BD%95%E5%B0%86-template-%E8%BD%AC%E6%8D%A2%E6%88%90-render"><span class="toc-text">8、如何将 template 转换成 render</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81Vue%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BE%9D%E8%B5%96%E6%94%B6%E9%9B%86"><span class="toc-text">9、Vue如何进行依赖收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11%E3%80%81Vue-%E4%B8%AD-diff-%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="toc-text">11、Vue 中 diff 算法原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12%E3%80%81Vue3-%E4%B8%AD%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8C%96"><span class="toc-text">12、Vue3 中模板编译做了哪些优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13%E3%80%81Vue3-%E6%96%B0%E7%89%B9%E6%80%A7"><span class="toc-text">13、Vue3 新特性</span></a></li></ol></li></ol>
   </div>
 
 
@@ -235,6 +235,66 @@
 <li>默认在初始化时会调用render函数，此时会触发属性依赖收集track</li>
 <li>当属性发生修改时会找到对应的effect列表依次执行trigger</li>
 </ul>
+<h4 id="11、Vue-中-diff-算法原理"><a href="#11、Vue-中-diff-算法原理" class="headerlink" title="11、Vue 中 diff 算法原理"></a>11、Vue 中 diff 算法原理</h4><h4 id="12、Vue3-中模板编译做了哪些优化"><a href="#12、Vue3-中模板编译做了哪些优化" class="headerlink" title="12、Vue3 中模板编译做了哪些优化"></a>12、Vue3 中模板编译做了哪些优化</h4><h4 id="13、Vue3-新特性"><a href="#13、Vue3-新特性" class="headerlink" title="13、Vue3 新特性"></a>13、Vue3 新特性</h4><ul>
+<li>Composition API<br>函数的方式编写组件<br>组合式API</li>
+<li>setup语法糖 <script setup></li>
+<li>suspense 异步组件<br>主要的作用优雅地处理异步组件的加载状态</li>
+</ul>
+<pre><code class="html">&lt;Suspense&gt;
+    &lt;template #default&gt;
+        &lt;!-- 可以配合async setup使用 --&gt;
+        &lt;AsyncComponent&gt;&lt;/AsyncComponent&gt;
+    &lt;/template&gt;
+    &lt;template #fallback&gt;
+        正在加载异步组件...
+    &lt;/template&gt;
+&lt;/Suspense&gt;
+</code></pre>
+<ul>
+<li>teleport<br>传送门组件，指定将组件渲染到某个容器中。常用于弹窗或者模态框组件。</li>
+</ul>
+<pre><code class="html">&lt;button @click=&quot;open = true&quot;&gt;打开模态框&lt;/button&gt;
+&lt;Teleport to=&quot;body&quot;&gt;
+  &lt;div v-if=&quot;open&quot; class=&quot;modal&quot;&gt;
+    &lt;button @click=&quot;open = false&quot;&gt;关闭&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/Teleport&gt;
+</code></pre>
+<ul>
+<li>Fragement(碎片化节点)<br>vue2中组件只能有一个根元素；vue3中如果在vue页面中有多个元素节点。那么编译时vue会在这些元素节点上添加一个<Fragment></Fragment>标签。并且该标签不会出现在dom树中。</li>
+<li>Emits Component Option<br>默认绑定的事件会被绑定到根元素上，通过 Emits 属性可将事件从attrs 中移除。</li>
+<li>动态CSS<style> 标签支持使用 v-bind CSS 函数将 CSS 的值链接到动态的组件状态</li>
+</ul>
+<pre><code class="js">background: v-bind(color);
+</code></pre>
+<ul>
+<li>createRenderer API from @vue/runtime-core to create custom renderers<br>提供自定义渲染器，可以在非 DOM 环境中使用 Vue 的运行时。</li>
+<li>SFC <style scoped> can now include global rules or rules that target only slotted content<br>在作用域样式中可以包含全局规则或只针对插槽内容的规则</li>
+</ul>
+<pre><code class="css">/* 跨组件修改组件内样式 */
+.parent :deep(h1) &#123;
+  color: red;
+&#125;
+/* 控制全局样式 */
+:global(.root) &#123;
+  width: 100px;
+  height: 100px;
+  background: yellow;
+&#125;
+/* 控制插槽内容的样式 */
+:slotted(.child) &#123;
+  color: red;
+&#125;
+</code></pre>
+<h4 id="14-Vue3-对⽐-Vue2-的变化"><a href="#14-Vue3-对⽐-Vue2-的变化" class="headerlink" title="14.Vue3 对⽐ Vue2 的变化"></a>14.Vue3 对⽐ Vue2 的变化</h4><p>优化<br>性能优化：<br>1、响应式优化<br>使用了Proxy替代 Object.defineProperty 实现响应式。（ Object.defineProperty对属性进行递归重写添加getter及setter性能差，同时新增和修改属性无法精准检测变化；对数组劫持性能也比较差，同时不支持Map和Set结构。）<br>2、diff算法<br><strong>全量 diff 算法中采用最长递增子序列减少节点的移动。在非全量 diff 算法中只比较动态节点，通过 PatchFlag 标记更新动态的部分。</strong><br>3、模板编译优化。<br>给动态节点增添 PatchFlag 标记；对静态节点进行静态提升；对事件进行缓存处理等。</p>
+<p>体积优化<br>1、移除了不常用的 API</p>
+<ul>
+<li>移除 inline-template (Vue2 中就不推荐使用)</li>
+<li>$on、$off、$once （如果有需要可以采用 mitt 库来实现）</li>
+<li>删除过滤器 （可以通过计算属性或者方法来实现）</li>
+<li>$children移除 （可以通过provide，inject方法构建$children）<br>移除.sync .native)修饰符 (.sync通过 v-model:xxx实现，.native为 Vue3 中的默认行为) 以及不在支持 keycode 作为v-on修饰符（@keyup.13 不在支持）<br>移除全局 API。Vue.component、Vue.use、Vue.directive (将这些 api 挂载到实例上)<br>2、tree-shaking<br>通过构建工具tree-shaking实现按需引入，减少体积<br>3、TypeScript支持<br>4、支持自定义渲染器<br>用户可以自定义渲染API达到跨平台得目的。扩展能力更强，无需改造vue源码。<br>4、源码结构变化：<br>Vue3 源码采用 monorepo 方式进行管理，将模块拆分到 package 目录中，解耦后可单独使用。</li>
+</ul>
+<h4 id="15-如何看待-Composition-API-和-Options-API"><a href="#15-如何看待-Composition-API-和-Options-API" class="headerlink" title="15.如何看待 Composition API 和 Options API?"></a>15.如何看待 Composition API 和 Options API?</h4><p>1、Vue2中用户编写复杂业务逻辑反复横跳<br>2、Vue2中this指向明确<br>3、组件逻辑共享，Vue2中Minxin会出现来源不明、命名冲突等问题。<br>4、Vue2 中很多未使用方法或属性依旧会被打包，并且所有全局 API 都在 Vue 对象上公开。Composition API 对 tree-shaking 更加友好，代码也更容易压缩。</p>
 
     </div>
     
